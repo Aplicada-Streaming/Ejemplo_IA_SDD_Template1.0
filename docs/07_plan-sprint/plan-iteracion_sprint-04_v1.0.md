@@ -197,7 +197,9 @@ RendererRegistry.GetRenderer(target)  ← Sprint 04
 
 ## ✅ Criterios de terminado (Definition of Done)
 
-Una tarea se considera terminada cuando:
+Aplica la [Definition of Done canónica](../08_calidad_y_pruebas/definition-of-done_v1.0.md).
+
+### Criterios específicos de este sprint
 
 * `EscPosRenderer` genera secuencias de bytes ESC/POS correctas para documentos con texto, alineación, estilos y estructura
 * Los bytes producidos comienzan con `ESC @` (init) y terminan con `GS V` (corte)
@@ -207,7 +209,6 @@ Una tarea se considera terminada cuando:
 * La app MAUI de ejemplo ejecuta el pipeline completo y muestra resultados
 * Tests unitarios validan byte[] esperados sin necesidad de hardware
 * No existe dependencia de ESCPOS_NET ni de servicios de hardware en la librería del motor
-* El código mantiene separación de responsabilidades entre motor y app host
 
 ---
 

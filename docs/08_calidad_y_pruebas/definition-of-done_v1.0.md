@@ -37,8 +37,12 @@ Una funcionalidad, historia o tarea se considera **Done** cuando cumple TODOS lo
 ## 2.3 Calidad
 
 - [ ] Validaciones DSL exitosas (cuando aplica)
-- [ ] No existen defectos críticos o bloqueantes abiertos
-- [ ] El rendimiento es aceptable para el caso de uso
+- [ ] No existen defectos con etiqueta "blocker" o "release-blocker" abiertos
+- [ ] El rendimiento cumple los SLAs definidos:
+  - Parser DSL: < 100 ms para plantillas < 10 kB
+  - Layout Engine: < 50 ms para documentos < 1000 nodos
+  - Renderizado ESC/POS: < 500 ms para documentos < 5 kB
+  - Renderizado completo end-to-end: < 500 ms en dispositivo móvil estándar
 
 ## 2.4 Documentación
 

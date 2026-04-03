@@ -314,26 +314,42 @@ El sistema deberá operar de forma multiplataforma y ser integrable con aplicaci
 
 # 10. Trazabilidad
 
-| Necesidad de negocio             | Funcionalidad                | Caso de uso         |
-| -------------------------------- | ---------------------------- | ------------------- |
-| Generar documentos dinámicos     | Carga de plantilla DSL       | CU-13               |
-| Validar estructura de plantillas | Validación DSL               | CU-14               |
-| Personalizar documentos          | Resolución de datos          | CU-15               |
-| Procesar listas                  | Iteraciones                  | CU-16               |
-| Aplicar lógica condicional       | Evaluación de condiciones    | CU-17               |
-| Inyectar datos externos          | Carga de datos               | CU-18               |
-| Garantizar consistencia de datos | Validación de estructura     | CU-19               |
-| Vincular datos con plantilla     | Mapeo de datos               | CU-20               |
-| Configurar dispositivos          | Perfil de impresora          | CU-21               |
-| Asegurar compatibilidad          | Validación de perfil         | CU-22               |
-| Respetar limitaciones físicas    | Restricciones de dispositivo | CU-23               |
-| Integración con APIs             | Descarga de recursos         | CU-24, CU-25, CU-26 |
-| Integración con apps cliente     | Integración .NET MAUI        | CU-27               |
-| Configuración del motor          | Configuración DSL            | CU-28               |
-| Extensibilidad                   | Nuevos renderizadores        | CU-29               |
-| Manejo de errores en plantilla  | Validación y errores            | CU-30               |
-| Manejo de errores en datos      | Diagnóstico de datos            | CU-31               |
-| Manejo de errores de impresión  | Recuperación ante fallo         | CU-32               |
+| NB | Necesidad de negocio | Funcionalidad | Caso de uso | Versión vigente | RN asociadas | Estado |
+| --- | --- | --- | --- | --- | --- | --- |
+| NB-01 | Interpretar plantillas DSL | Interpretación y parsing | [CU-01](casos-de-uso/CU-01-interpretar-plantilla-dsl_v1.0.md) | v1.0 | RN-01, RN-02 | Activo |
+| NB-01 | Resolver datos del documento | Resolución de datos | [CU-02](casos-de-uso/CU-02-resolver-datos-documento_v1.0.md) | v1.0 | — | Activo |
+| NB-01 | Construir modelo interno | Modelo abstracto | [CU-03](casos-de-uso/CU-03-construir-modelo-interno_v1.0.md) | v1.0 | RN-03, RN-05 | Activo |
+| NB-01 | Ejecutar motor de layout | Layout engine | [CU-04](casos-de-uso/CU-04-ejecutar-motor-de-layout_v1.0.md) | v1.0 | — | Activo |
+| NB-01 | Generar representación abstracta | Representación intermedia | [CU-05](casos-de-uso/CU-05-generar-representacion-abstracta_v1.0.md) | v1.0 | RN-05 | Activo |
+| NB-04 | Renderizar ESC/POS | Renderizado térmico | [CU-06](casos-de-uso/CU-06-renderizar-escpos_v2.0.md) | **v2.0** | RN-03, RN-06 | Activo |
+| NB-04 | Renderizar texto plano | Debug rendering | [CU-07](casos-de-uso/CU-07-renderizar-texto-plano-debug_v1.0.md) | v1.0 | — | Activo |
+| NB-04 | Renderizar vista previa UI | Preview en MAUI | [CU-08](casos-de-uso/CU-08-renderizar-vista-previa-ui_v1.0.md) | v1.0 | — | Activo |
+| NB-04 | Renderizar PDF | Salida paginada | [CU-09](casos-de-uso/CU-09-renderizar-pdf_v2.0.md) | **v2.0** | RN-03 | Futuro |
+| NB-04 | Enviar a impresora Bluetooth | Impresión BT | [CU-10](casos-de-uso/CU-10-enviar-impresora-bluetooth_v1.0.md) | v1.0 | — | Activo |
+| NB-04 | Seleccionar perfil de impresora | Perfil de dispositivo | [CU-11](casos-de-uso/CU-11-seleccionar-perfil-impresora_v1.0.md) | v1.0 | RN-06 | Activo |
+| NB-04 | Adaptar documento al perfil | Adaptación de salida | [CU-12](casos-de-uso/CU-12-adaptar-documento-perfil_v1.0.md) | v1.0 | RN-06 | Activo |
+| NB-02 | Cargar plantilla DSL | Carga de plantilla | [CU-13](casos-de-uso/CU-13-cargar-plantilla-dsl_v1.0.md) | v1.0 | RN-01 | Activo |
+| NB-02 | Validar plantilla DSL | Validación DSL | [CU-14](casos-de-uso/CU-14-validar-plantilla-dsl_v1.0.md) | v1.0 | RN-01, RN-02 | Activo |
+| NB-01 | Resolver referencias de datos | Resolución de datos | [CU-15](casos-de-uso/CU-15-resolver-referencias-datos_v1.0.md) | v1.0 | — | Activo |
+| NB-01 | Ejecutar iteraciones/listas | Iteraciones | [CU-16](casos-de-uso/CU-16-ejecutar-iteraciones-listas_v1.0.md) | v1.0 | — | Activo |
+| NB-01 | Evaluar condiciones | Evaluación condicional | [CU-17](casos-de-uso/CU-17-evaluar-condiciones_v1.0.md) | v1.0 | — | Activo |
+| NB-01 | Cargar datos del documento | Carga de datos | [CU-18](casos-de-uso/CU-18-cargar-datos-documento_v1.0.md) | v1.0 | — | Activo |
+| NB-01 | Validar estructura de datos | Validación de datos | [CU-19](casos-de-uso/CU-19-validar-estructura-datos_v1.0.md) | v1.0 | — | Activo |
+| NB-01 | Mapear datos a plantilla | Mapeo de datos | [CU-20](casos-de-uso/CU-20-mapear-datos-plantilla_v1.0.md) | v1.0 | — | Activo |
+| NB-04 | Cargar perfil de impresora | Perfil de dispositivo | [CU-21](casos-de-uso/CU-21-cargar-perfil-impresora_v2.0.md) | **v2.0** | RN-06 | Activo |
+| NB-04 | Validar perfil de dispositivo | Validación de perfil | [CU-22](casos-de-uso/CU-22-validar-perfil-dispositivo_v1.0.md) | v1.0 | RN-06 | Activo |
+| NB-04 | Aplicar restricciones dispositivo | Restricciones | [CU-23](casos-de-uso/CU-23-aplicar-restricciones-dispositivo_v1.0.md) | v1.0 | RN-06 | Activo |
+| NB-03 | Proveer plantilla al motor | Integración API | [CU-24](casos-de-uso/CU-24-proveer-plantilla-motor_v2.0.md) | **v2.0** | — | Activo |
+| NB-03 | Proveer datos al motor | Integración API | [CU-25](casos-de-uso/CU-25-proveer-datos-motor_v2.0.md) | **v2.0** | — | Activo |
+| NB-03 | Proveer perfil al motor | Integración API | [CU-26](casos-de-uso/CU-26-proveer-perfil-motor_v2.0.md) | **v2.0** | — | Activo |
+| NB-05 | Integrar motor con MAUI | Integración .NET MAUI | [CU-27](casos-de-uso/CU-27-integrar-motor-maui_v1.0.md) | v1.0 | — | Activo |
+| NB-05 | Configurar motor DSL | Configuración DSL | [CU-28](casos-de-uso/CU-28-configurar-motor-dsl_v1.0.md) | v1.0 | — | Activo |
+| NB-06 | Extender renderizadores | Extensibilidad | [CU-29](casos-de-uso/CU-29-extender-motor-renderizadores_v1.0.md) | v1.0 | — | Activo |
+| NB-06 | Manejar errores de plantilla | Validación y errores | [CU-30](casos-de-uso/CU-30-manejar-errores-plantilla_v1.0.md) | v1.0 | — | Activo |
+| NB-06 | Manejar errores de datos | Diagnóstico de datos | [CU-31](casos-de-uso/CU-31-manejar-errores-datos_v1.0.md) | v1.0 | — | Activo |
+| NB-06 | Manejar errores de impresión | Recuperación ante fallo | [CU-32](casos-de-uso/CU-32-manejar-errores-impresion_v1.0.md) | v1.0 | — | Activo |
+
+> **Nota:** Los CU marcados en **negrita** poseen versión v2.0 que reemplaza a la v1.0. Los archivos v1.0 se conservan como referencia histórica.
 
 ---
 

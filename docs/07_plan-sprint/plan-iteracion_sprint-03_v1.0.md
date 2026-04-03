@@ -127,21 +127,15 @@ RenderResult (texto plano)
 
 ## ✅ Criterios de terminado (Definition of Done)
 
-Una tarea se considera terminada cuando:
+Aplica la [Definition of Done canónica](../08_calidad_y_pruebas/definition-of-done_v1.0.md).
+
+### Criterios específicos de este sprint
 
 * LayoutEngine calcula correctamente la distribución según DeviceProfile
 * La representación abstracta es generada e independiente del renderer
 * TextRenderer produce salida legible y estructurada
 * El pipeline completo DSL → Render funciona end-to-end
-* Tests unitarios cubren casos principales:
-
-  * Cálculo de layout simple
-  * Adaptación a ancho del dispositivo
-  * Representación abstracta de documento complejo
-  * Renderizado de texto plano
-  * Integración de todas las etapas
 * No hay acoplamiento innecesario entre LayoutEngine y renderizadores
-* El código mantiene separación de responsabilidades
 * IDocumentEngine proporciona interfaz unificada para consumidores
 
 ---

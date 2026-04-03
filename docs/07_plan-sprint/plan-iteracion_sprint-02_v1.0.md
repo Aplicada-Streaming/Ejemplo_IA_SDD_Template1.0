@@ -107,19 +107,15 @@ EvaluatedDocument
 
 ## ✅ Criterios de terminado (Definition of Done)
 
-Una tarea se considera terminada cuando:
+Aplica la [Definition of Done canónica](../08_calidad_y_pruebas/definition-of-done_v1.0.md).
+
+### Criterios específicos de este sprint
 
 * El evaluator procesa correctamente un AST generado por el parser
 * Variables son correctamente resueltas desde el contexto
 * Condiciones booleanas funcionan correctamente
 * Los loops generan múltiples nodos evaluados
 * Se genera un EvaluatedDocument válido
-* Tests unitarios cubren casos principales:
-
-  * Variables simples
-  * Variables anidadas
-  * Condiciones true/false
-  * Iteraciones sobre listas
 * No hay acoplamiento con el renderer
 
 ---

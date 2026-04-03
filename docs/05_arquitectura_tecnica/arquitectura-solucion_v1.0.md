@@ -233,6 +233,25 @@ Actúa como punto de entrada principal del sistema.
 
 ---
 
+### 5.11 Mapeo Componentes → Proyectos .NET
+
+| Componente | Namespace | Proyecto (.csproj) | Responsabilidad |
+| --- | --- | --- | --- |
+| Cargador de Plantillas DSL | `MotorDsl.Templates` | `MotorDsl.Templates.csproj` | Carga, caché y versionado de plantillas |
+| Validador DSL | `MotorDsl.Validation` | `MotorDsl.Validation.csproj` | Validación sintáctica y de esquema |
+| Parser DSL | `MotorDsl.Parser` | `MotorDsl.Parser.csproj` | Transformación DSL → AST |
+| Modelo Abstracto del Documento | `MotorDsl.Model` | `MotorDsl.Model.csproj` | Representación interna independiente del render |
+| Resolver de Datos | `MotorDsl.Data` | `MotorDsl.Data.csproj` | Resolución de variables y datos externos |
+| Motor de Evaluación | `MotorDsl.Evaluation` | `MotorDsl.Evaluation.csproj` | Evaluación de condiciones e iteraciones |
+| Motor de Layout | `MotorDsl.Layout` | `MotorDsl.Layout.csproj` | Distribución espacial lógica del documento |
+| Renderizadores | `MotorDsl.Renderers.*` | `MotorDsl.Renderers.EscPos.csproj`, `MotorDsl.Renderers.Ui.csproj`, `MotorDsl.Renderers.Text.csproj` | Conversión del modelo abstracto a salida específica |
+| Gestor de Perfiles de Dispositivo | `MotorDsl.Devices` | `MotorDsl.Devices.csproj` | Perfiles de capacidades y restricciones de dispositivos |
+| Orquestador del Motor | `MotorDsl.Engine` | `MotorDsl.Engine.csproj` | Coordinación del pipeline completo |
+
+> **Nota:** Los nombres de namespace y proyecto son orientativos. La estructura final se definirá durante la implementación del Sprint 01.
+
+---
+
 ## 6. Flujo principal — Renderización de documento
 
 ```text

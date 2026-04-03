@@ -276,7 +276,9 @@ IDeviceProfileProvider → InMemoryDeviceProfileProvider (default)
 
 ## ✅ Criterios de terminado (Definition of Done)
 
-Una tarea se considera terminada cuando:
+Aplica la [Definition of Done canónica](../08_calidad_y_pruebas/definition-of-done_v1.0.md).
+
+### Criterios específicos de este sprint
 
 * `ITemplateProvider`, `IDataProvider`, `IDeviceProfileProvider` están definidos con implementaciones In-Memory
 * `AddMotorDslEngine()` registra los proveedores default automáticamente
@@ -285,10 +287,8 @@ Una tarea se considera terminada cuando:
 * `RenderResult.ToBase64()` genera Base64 decodificable al `byte[]` original
 * `TableNode` se renderiza correctamente en TextRenderer y EscPosRenderer
 * QR code se genera con comandos `GS ( k` en EscPosRenderer
-* Tests unitarios validan todas las funcionalidades nuevas
 * No se altera funcionalidad existente (84 tests previos siguen pasando)
 * La librería mantiene cero dependencias de infraestructura externa
-* El código compila, pasa todos los tests y está integrado en el pipeline
 
 ---
 

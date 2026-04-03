@@ -83,15 +83,13 @@ Implementar el **MVP técnico del núcleo del motor**, permitiendo:
 
 ## ✅ Criterios de terminado (Definition of Done)
 
-Una tarea se considera terminada cuando:
+Aplica la [Definition of Done canónica](../08_calidad_y_pruebas/definition-of-done_v1.0.md).
 
-* El código compila correctamente
-* Está integrado en la solution
-* Tiene pruebas unitarias básicas (cuando aplica)
+### Criterios específicos de este sprint
+
 * El AST se genera correctamente desde un DSL simple
 * Se respeta la separación de responsabilidades
 * No existen dependencias cruzadas indebidas entre módulos
-* Se documenta cualquier decisión relevante
 
 ---
 

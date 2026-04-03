@@ -274,7 +274,9 @@ LayoutedDocument ──→ MauiDocumentPreview (Sprint 06)  ←── NUEVO
 
 ## ✅ Criterios de terminado (Definition of Done)
 
-Una tarea se considera terminada cuando:
+Aplica la [Definition of Done canónica](../08_calidad_y_pruebas/definition-of-done_v1.0.md).
+
+### Criterios específicos de este sprint
 
 * `IDataValidator` está definido y `DataValidator` recorre TextNode, ConditionalNode, LoopNode, TableNode
 * `ValidationResult` reporta errores tipados con campo, tipo y mensaje
@@ -284,10 +286,8 @@ Una tarea se considera terminada cuando:
 * Barcode EAN-13 genera secuencia `GS k` correcta en EscPosRenderer
 * TextRenderer muestra placeholder `[BARCODE: ...]`
 * `MauiDocumentPreview` genera `View` MAUI desde `LayoutedDocument` con estilos
-* Tests unitarios validan todas las funcionalidades nuevas
 * No se altera funcionalidad existente (130 tests previos siguen pasando)
 * La librería core NO tiene dependencia de `Microsoft.Maui`
-* El código compila, pasa todos los tests y está integrado en el pipeline
 
 ---
 

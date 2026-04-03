@@ -66,11 +66,7 @@ El sistema se organiza en capas y componentes desacoplados:
 - Capa de validación  
 - Contratos de entrada/salida  
 
-📄 Ver detalle:
-
-```text
-/docs/05_arquitectura_tecnica/arquitectura-solucion_v1.0.md
-````
+📄 Ver detalle: [Arquitectura de solución](05_arquitectura_tecnica/arquitectura-solucion_v1.0.md)
 
 ---
 
@@ -78,22 +74,51 @@ El sistema se organiza en capas y componentes desacoplados:
 
 ```text
 /docs
-  00_contexto
-  01_necesidades_negocio
-  02_especificacion_funcional
-  03_ux-ui
-  04_prompts_ai
-  05_arquitectura_tecnica
-  06_backlog-tecnico
-  07_plan-sprint
-  08_calidad_y_pruebas
-  09_devops
-  10_developer_guide
-  11_examples
-
-/src        (código fuente del motor DSL)
-/tests      (pruebas automatizadas)
+  00_contexto/              — Visión, alcance, roadmap, acuerdo de equipo
+  01_necesidades_negocio/   — Necesidades de negocio (NB-01 a NB-06)
+  02_especificacion_funcional/ — CU, reglas de negocio, modelo de datos, DSL
+  03_ux-ui/                 — Experiencia de uso del motor, wireframes
+  04_prompts_ai/            — Prompts para clasificación IA
+  05_arquitectura_tecnica/  — ADRs, contratos, flujo de ejecución, extensibilidad
+  06_backlog-tecnico/       — Product backlog, backlog técnico, DoR
+  07_plan-sprint/           — Sprint plans (01-08), velocity, templates
+  08_calidad_y_pruebas/     — Estrategia QA, DoD, casos de prueba, matriz
+  09_devops/                — CI/CD, versionado, deploy, publicación NuGet
+  10_developer_guide/       — Guía de integración, formatos, ejemplos
+  11_examples/              — Ejemplos progresivos (simple → avanzado)
+/devs                       — Herramientas y documentación para contribuidores
 ```
+
+---
+
+## 📖 Índice de Carpetas
+
+| Carpeta | Responsabilidad | Orden de Lectura |
+|---------|----------------|:----------------:|
+| [00_contexto](00_contexto/) | Visión, alcance, roadmap, acuerdo de equipo | 1 |
+| [01_necesidades_negocio](01_necesidades_negocio/) | Necesidades de negocio y trazabilidad | 2 |
+| [02_especificacion_funcional](02_especificacion_funcional/) | Casos de uso, reglas de negocio, DSL, modelo de datos | 3 |
+| [03_ux-ui](03_ux-ui/) | Experiencia de uso del motor, representaciones de salida | 4 |
+| [04_prompts_ai](04_prompts_ai/) | Prompts de IA para clasificación de documentos | 5 |
+| [05_arquitectura_tecnica](05_arquitectura_tecnica/) | Arquitectura, decisiones, contratos, extensibilidad | 6 |
+| [06_backlog-tecnico](06_backlog-tecnico/) | Product backlog, backlog técnico, Definition of Ready | 7 |
+| [07_plan-sprint](07_plan-sprint/) | Planes de sprint, velocity, ceremonias | 8 |
+| [08_calidad_y_pruebas](08_calidad_y_pruebas/) | Estrategia QA, DoD, casos de prueba, cobertura | 9 |
+| [09_devops](09_devops/) | Pipeline CI/CD, versionado, entornos, publicación | 10 |
+| [10_developer_guide](10_developer_guide/) | Guía de integración para desarrolladores | 11 |
+| [11_examples](11_examples/) | Ejemplos funcionales progresivos | 12 |
+
+---
+
+## 🚶 Primer Viaje del Desarrollador
+
+Si sos nuevo en el proyecto, seguí este recorrido:
+
+1. **Entender el contexto** (2 min) → [Visión de producto](00_contexto/vision-producto_v1.0.md)
+2. **Conocer el DSL** (5 min) → [Definición del DSL](02_especificacion_funcional/definicion-dsl_v1.0.md)
+3. **Ver la arquitectura** (10 min) → [Arquitectura de solución](05_arquitectura_tecnica/arquitectura-solucion_v1.0.md) y [README de arquitectura](05_arquitectura_tecnica/README.md)
+4. **Integrar la librería** (15 min) → [Guía de uso](05_arquitectura_tecnica/guia-uso-libreria_v1.0.md)
+5. **Probar un ejemplo** (10 min) → [Ejemplo simple](11_examples/ejemplo-01-simple.md)
 
 ---
 
@@ -170,11 +195,7 @@ Lenguaje estructurado que define:
 * Expresiones
 * Reglas de composición
 
-📄 Ver detalle:
-
-```text
-/docs/02_especificacion_funcional/definicion-dsl_v1.0.md
-```
+📄 Ver detalle: [Definición del DSL](02_especificacion_funcional/definicion-dsl_v1.0.md)
 
 ---
 
@@ -220,11 +241,7 @@ Permiten ampliar el motor mediante:
 * Evaluadores adicionales
 * Renderizadores específicos
 
-📄 Ver detalle:
-
-```text
-/docs/05_arquitectura_tecnica/extensibilidad-motor_v1.0.md
-```
+📄 Ver detalle: [Extensibilidad del motor](05_arquitectura_tecnica/extensibilidad-motor_v1.0.md)
 
 ---
 
@@ -252,20 +269,13 @@ Una funcionalidad se considera completa cuando:
 * Documentación actualizada
 * PR aprobado
 
-📄 Ver detalle:
-
-```text
-/docs/08_calidad_y_pruebas/definition-of-done_v1.0.md
-```
+📄 Ver detalle: [Definition of Done](08_calidad_y_pruebas/definition-of-done_v1.0.md)
 
 ---
 
-## 🧭 Roadmap (alto nivel)
+## 🧭 Roadmap
 
-* v1.1 — mejoras en evaluador de expresiones
-* v1.2 — nuevos renderizadores
-* v1.3 — optimización de performance
-* v2.0 — evolución del DSL (breaking changes)
+Ver [Roadmap detallado del producto](00_contexto/roadmap-producto_v1.0.md) con trazabilidad Fases → Épicas → Sprints → Releases.
 
 ---
 
@@ -278,11 +288,7 @@ El proyecto incluye:
 * Validaciones del motor
 * Estrategias de testing automatizado
 
-📄 Ver documentación:
-
-```text
-/docs/08_calidad_y_pruebas/
-```
+📄 Ver documentación: [Calidad y pruebas](08_calidad_y_pruebas/)
 
 ---
 
@@ -295,17 +301,13 @@ El proyecto cuenta con estrategia de:
 * Entornos de despliegue
 * Promoción entre ambientes
 
-📄 Ver documentación:
-
-```text
-/docs/09_devops/
-```
+📄 Ver documentación: [DevOps](09_devops/)
 
 Incluye:
 
-* pipeline-ci-cd_v1.0.md
-* estrategia-versionado_v1.0.md
-* entornos-deploy_v1.0.md
+* [pipeline-ci-cd_v1.0.md](09_devops/pipeline-ci-cd_v1.0.md)
+* [estrategia-versionado_v1.0.md](09_devops/estrategia-versionado_v1.0.md)
+* [entornos-deploy_v1.0.md](09_devops/entornos-deploy_v1.0.md)
 
 ---
 

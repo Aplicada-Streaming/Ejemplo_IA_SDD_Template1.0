@@ -21,3 +21,37 @@ Una misma librería de generación de documentos utilizada tanto en una aplicaci
 
 **Impacto:**
 Integración en múltiples aplicaciones
+
+---
+
+### Problema Específico
+
+No existe una librería centralizada de generación de documentos:
+- Cada aplicación tiene su propia implementación
+- No hay contratos ni interfaces comunes
+- La lógica de negocio de documentos está embebida en cada app
+
+### Criterios de Éxito
+
+| Criterio | Métrica | Target |
+|----------|---------|--------|
+| Integración | Aplicaciones usando la librería compartida | ≥ 2 apps |
+| Abstracción | APIs públicas bien definidas | 100% interfaces documentadas |
+| Independencia | Librería sin dependencia de app específica | 0 dependencias app-specific |
+
+### Stakeholders
+
+- Equipo de Arquitectura (propietario)
+- Equipos de Desarrollo de productos (consumidores)
+
+### Trazabilidad a Casos de Uso
+
+| CU | Descripción | Relación |
+|----|-------------|----------|
+| [CU-27](../../02_especificacion_funcional/casos-de-uso/CU-27-integrar-motor-maui_v1.0.md) | Integrar motor en MAUI | Primer caso de integración |
+| [CU-28](../../02_especificacion_funcional/casos-de-uso/CU-28-configurar-motor-dsl_v1.0.md) | Configurar motor DSL | Configuración cross-app |
+| [CU-29](../../02_especificacion_funcional/casos-de-uso/CU-29-extender-motor-renderizadores_v1.0.md) | Extender motor | Extensibilidad cross-app |
+
+### Dependencias
+
+- Depende de NB-01 (desacople)
