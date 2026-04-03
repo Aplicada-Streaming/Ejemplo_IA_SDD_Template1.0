@@ -1,0 +1,369 @@
+  # Pipeline CI/CD — Motor DSL  
+**Archivo:** pipeline-ci-cd_v1.0.md  
+**Proyecto:** Motor DSL para generación y renderizado de documentos  
+**Versión:** v1.0  
+**Estado:** Aprobado  
+**Fecha:** 2026-03-29  
+**Owner:** DevOps  
+
+---
+
+## 1. Propósito
+
+Este documento define el pipeline de Integración Continua y Entrega Continua (CI/CD) del Motor DSL. Su objetivo es automatizar la construcción, validación, empaquetado y publicación del motor como paquete **NuGet**, asegurando calidad, trazabilidad y consistencia en cada versión liberada.
+
+---
+
+## 2. Alcance
+
+El pipeline cubre:
+
+- Build de librerías .NET  
+- Ejecución de tests  
+- Análisis de calidad  
+- Empaquetado como NuGet (.nupkg)  
+- Publicación en registry (NuGet local o remoto)  
+- Build y publicación de apps Android (APK)  
+- Build de app iOS (simulador .app.zip)  
+- Scripts de desarrollo local (.bat)  
+
+Fuera de alcance en v1.0:
+
+- Firma de paquetes  
+- Escaneo de seguridad avanzado  
+- Publicación multi-registry  
+
+---
+
+## 3. Estrategia general
+
+El pipeline se ejecuta ante:
+
+- Pull Requests  
+- Push a ramas principales  
+- Tags de release  
+
+Flujo de alto nivel:
+
+```text
+Commit → Build → Tests → Quality → Pack → Publish (NuGet)
+````
+
+---
+
+## 4. Disparadores (triggers)
+
+### 4.1 Pull Request
+
+Se ejecuta:
+
+* Build
+* Tests
+* Análisis estático
+
+**Objetivo:** prevenir errores antes del merge.
+
+---
+
+### 4.2 Push a develop/main
+
+Se ejecuta:
+
+* Build completo
+* Tests
+* Empaquetado (sin publicar)
+
+**Objetivo:** validar continuamente el estado del motor.
+
+---
+
+### 4.3 Tag de versión
+
+Se ejecuta:
+
+* Build release
+* Tests completos
+* Generación de paquete NuGet versionado
+* Publicación en registry
+
+**Ejemplo de tag**
+
+```text
+v1.2.0
+```
+
+---
+
+## 5. Etapas del pipeline
+
+---
+
+### 5.1 Stage: Checkout
+
+**Objetivo:** obtener el código fuente.
+
+**Pasos**
+
+* Clonar repositorio
+* Restaurar dependencias
+* Validar versión desde tag o build
+
+---
+
+### 5.2 Stage: Build
+
+**Objetivo:** compilar las librerías del motor.
+
+**Incluye**
+
+* MotorDsl.Core
+* MotorDsl.Parser
+* MotorDsl.Rendering
+* MotorDsl.Extensions
+
+**Criterio de éxito**
+
+* Build sin errores
+
+---
+
+### 5.3 Stage: Tests
+
+**Objetivo:** validar calidad funcional.
+
+**Incluye**
+
+* Tests unitarios
+* Tests de integración del pipeline DSL
+
+**Reglas**
+
+* Cobertura mínima: 70%
+* Fallo en tests → pipeline falla
+
+---
+
+### 5.4 Stage: Análisis de calidad
+
+**Objetivo:** detectar problemas de código.
+
+**Incluye**
+
+* Análisis estático
+* Code smells
+* Convenciones de naming
+* Validación de arquitectura (si aplica)
+
+**Regla**
+
+* Issues críticos → pipeline falla
+
+---
+
+### 5.5 Stage: Empaquetado (Pack)
+
+**Objetivo:** generar el paquete NuGet.
+
+**Salida**
+
+* Archivo `.nupkg`
+
+**Comando base**
+
+```bash
+dotnet pack -c Release
+```
+
+**Ejemplo de nombre**
+
+```text
+MotorDsl.1.2.0.nupkg
+```
+
+---
+
+### 5.6 Stage: Publicación (Publish NuGet)
+
+**Objetivo:** distribuir el paquete.
+
+**Condición**
+
+* Solo en tags de versión
+
+**Destino**
+
+* **NuGet.org** (https://api.nuget.org/v3/index.json) — producción
+
+**Condición adicional:** solo en tags `v*` (ej. `v1.0.2`)
+
+**Secret requerido:** `NUGET_API_KEY` (configurado en GitHub Secrets)
+
+**Metadatos requeridos en cada csproj:**
+`<PackageId>`, `<Authors>`, `<Description>`, `<PackageTags>`, `<PackageLicenseExpression>`, `<RepositoryUrl>`
+
+**Comando base**
+
+```bash
+dotnet nuget push MotorDsl.1.2.0.nupkg --api-key <NUGET_API_KEY> --source https://api.nuget.org/v3/index.json
+```
+
+---
+
+### 5.7 Stage: CD Android
+
+**Trigger:** push main o tag v*
+
+- Genera APK de SampleApp y MultaApp
+- Artifact: *-APK con retención 7 días
+
+---
+
+### 5.8 Stage: CD iOS (simulador)
+
+**Trigger:** push main (en paths `samples/MotorDsl.SampleApp/**` o `samples/MotorDsl.MultaApp/**`)
+
+- SampleApp y MultaApp en workflows separados
+- Genera .app.zip para simulador iossimulator-arm64
+- Artifact: *.app.zip con retención 1 día
+- Runner requerido: `macos-15`, Xcode 26.0
+
+---
+
+## 6. Gates de calidad
+
+El pipeline falla si ocurre cualquiera de los siguientes:
+
+* Error de compilación
+* Tests fallidos
+* Cobertura < 70%
+* Issues críticos de análisis
+* Fallo en empaquetado
+
+---
+
+## 7. Versionado en el pipeline
+
+Se utiliza **Semantic Versioning (SemVer)**.
+
+La versión se determina por:
+
+1. Tag git (principal)
+2. Número de build (fallback)
+
+**Ejemplos**
+
+* v1.0.0 → versión oficial
+* v1.1.0 → nueva funcionalidad
+* v1.1.1 → bugfix
+
+Fallback:
+
+```text
+1.1.0-build.45
+```
+
+---
+
+## 8. Variables de entorno
+
+Variables mínimas:
+
+* NUGET_API_KEY
+* NUGET_SOURCE
+* BUILD_CONFIGURATION
+* VERSION
+
+**Reglas**
+
+* Nunca hardcodear API keys
+* Usar secretos del pipeline
+
+---
+
+## 9. Estrategia de rollback
+
+En caso de error en publicación:
+
+* No sobrescribir versiones existentes (inmutabilidad)
+* Publicar nueva versión corregida (PATCH)
+* Mantener historial de versiones
+
+**Ejemplo**
+
+```text
+1.1.0 (fallo)
+→ 1.1.1 (corregido)
+```
+
+---
+
+## 10. Observabilidad del pipeline
+
+Se debe registrar:
+
+* Tiempo de build
+* Tiempo de tests
+* Cobertura de tests
+* Versiones publicadas
+* Frecuencia de releases
+
+---
+
+## 11. Ejemplo simplificado (pseudo YAML)
+
+build:
+test:
+pack:
+publish:
+```text
+.github/workflows/
+├── ci.yml                   ← tests en cada PR y push (185 tests, ubuntu-latest)
+├── cd-android.yml           ← APK SampleApp + MultaApp (ubuntu-latest)
+├── cd-ios-sampleapp.yml     ← .app.zip SampleApp, iossimulator-arm64 (macos-15)
+├── cd-ios-multaapp.yml      ← .app.zip MultaApp, iossimulator-arm64 (macos-15)
+└── cd-nuget.yml             ← NuGet.org en tags v*, NUGET_API_KEY (ubuntu-latest)
+```
+
+---
+
+## 12. Riesgos
+
+| Riesgo                | Impacto | Mitigación                   |
+| --------------------- | ------- | ---------------------------- |
+| Versionado incorrecto | Alta    | uso de tags SemVer           |
+| Publicación duplicada | Alta    | versiones inmutables         |
+| Tests insuficientes   | Alta    | cobertura mínima obligatoria |
+| API key expuesta      | Crítica | uso de secrets seguros       |
+
+---
+
+## 13. Evolución futura
+
+Implementado en v1.0 (actualización):
+
+- ✅ Publicación automática en NuGet.org (cd-nuget.yml con NUGET_API_KEY)
+- ✅ 4 paquetes publicados: MotorDsl.Core, Parser, Rendering, Extensions v1.0.2
+- ✅ Soporte iOS: cd-ios-sampleapp.yml y cd-ios-multaapp.yml
+- ✅ Sample de integración NuGet: MotorDsl.MultaApp.Nuget
+
+Planeado para v2.x:
+
+- Firma de paquetes
+- Validación de compatibilidad (breaking changes)
+- Escaneo de seguridad (SCA)
+- Generación automática de changelog
+- Multi-target frameworks
+- Firma de APK con keystore propio
+- Publicación en Google Play (AAB)
+- Scripts .bat para desarrollo local Windows
+
+---
+
+## 14. Control de cambios
+
+| Versión | Fecha      | Autor  | Descripción                             |
+| ------- | ---------- | ------ | --------------------------------------- |
+| v1.0    | 2026-03-29 | DevOps | Pipeline inicial para publicación NuGet |
+| v1.1    | 2026-04-02 | DevOps | Publicación real en NuGet.org (NUGET_API_KEY), cd-ios-multaapp.yml, MotorDsl.MultaApp.Nuget sample |
+
+---
