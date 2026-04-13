@@ -9,6 +9,131 @@
 
 ---
 
+## Índice
+
+### PARTE 1 — METODOLOGÍAS ÁGILES
+
+- [Sección 1 — Propósito del documento](#sección-1--propósito-del-documento)
+  - [1.1 Para qué sirve este documento](#11-para-qué-sirve-este-documento)
+  - [1.2 A quién está dirigido](#12-a-quién-está-dirigido)
+  - [1.3 Relación con la documentación SDD del proyecto](#13-relación-con-la-documentación-sdd-del-proyecto)
+- [Sección 2 — Manifiesto Ágil y principios fundamentales](#sección-2--manifiesto-ágil-y-principios-fundamentales)
+  - [2.1 Los 4 valores del Manifiesto Ágil](#21-los-4-valores-del-manifiesto-ágil)
+  - [2.2 Los 12 principios ágiles](#22-los-12-principios-ágiles)
+  - [2.3 Contexto histórico: por qué surgió](#23-contexto-histórico-por-qué-surgió)
+  - [2.4 Tabla comparativa: Waterfall vs. Ágil](#24-tabla-comparativa-waterfall-vs-ágil)
+- [Sección 3 — Scrum](#sección-3--scrum)
+  - [3.1 Definición y origen](#31-definición-y-origen)
+  - [3.2 Los 3 pilares](#32-los-3-pilares)
+  - [3.3 Los 5 valores](#33-los-5-valores)
+  - [3.4 Roles](#34-roles)
+  - [3.5 Artefactos](#35-artefactos)
+  - [3.6 Eventos / Ceremonias](#36-eventos--ceremonias)
+  - [3.7 El Sprint](#37-el-sprint)
+  - [3.8 Diagrama del ciclo Scrum](#38-diagrama-del-ciclo-scrum)
+- [Sección 4 — Kanban](#sección-4--kanban)
+  - [4.1 Definición y origen](#41-definición-y-origen)
+  - [4.2 Principios de Kanban](#42-principios-de-kanban)
+  - [4.3 Tablero Kanban](#43-tablero-kanban)
+  - [4.4 Métricas Kanban](#44-métricas-kanban)
+  - [4.5 Tabla comparativa: Scrum vs. Kanban](#45-tabla-comparativa-scrum-vs-kanban)
+  - [4.6 Cuándo elegir Kanban sobre Scrum](#46-cuándo-elegir-kanban-sobre-scrum)
+- [Sección 5 — Otras metodologías ágiles (resumen)](#sección-5--otras-metodologías-ágiles-resumen)
+  - [5.1 XP (Extreme Programming)](#51-xp-extreme-programming)
+  - [5.2 SAFe (Scaled Agile Framework)](#52-safe-scaled-agile-framework)
+  - [5.3 LeSS (Large-Scale Scrum)](#53-less-large-scale-scrum)
+  - [5.4 Scrumban](#54-scrumban)
+  - [5.5 Tabla comparativa rápida](#55-tabla-comparativa-rápida)
+- [Sección 6 — User Stories, Épicas y Tareas](#sección-6--user-stories-épicas-y-tareas)
+  - [6.0 Introducción — Conceptos fundamentales y vocabulario](#60-introducción--conceptos-fundamentales-y-vocabulario)
+  - [6.1 Formato estándar de User Story](#61-formato-estándar-de-user-story)
+  - [6.2 Criterios INVEST](#62-criterios-invest)
+  - [6.3 Criterios de aceptación: formato Given/When/Then](#63-criterios-de-aceptación-formato-givenwhenthen)
+  - [6.4 Jerarquía: Iniciativa → Épica → User Story → Sub-tarea → Bug](#64-jerarquía-iniciativa--épica--user-story--sub-tarea--bug)
+  - [6.5 Estimación](#65-estimación)
+  - [6.6 Priorización](#66-priorización)
+- [Sección 7 — Métricas ágiles](#sección-7--métricas-ágiles)
+  - [7.1 Velocity](#71-velocity)
+  - [7.2 Burndown Chart](#72-burndown-chart)
+  - [7.3 Burnup Chart](#73-burnup-chart)
+  - [7.4 Cumulative Flow Diagram (CFD)](#74-cumulative-flow-diagram-cfd)
+  - [7.5 Lead Time y Cycle Time](#75-lead-time-y-cycle-time)
+  - [7.6 Tabla resumen de métricas](#76-tabla-resumen-de-métricas)
+- [Sección 8 — Anti-patrones ágiles](#sección-8--anti-patrones-ágiles)
+  - [8.1 Anti-patrones del backlog y gestión](#81-anti-patrones-del-backlog-y-gestión)
+  - [8.2 Anti-patrones de sprints y ceremonias](#82-anti-patrones-de-sprints-y-ceremonias)
+  - [8.3 Anti-patrones adicionales comunes](#83-anti-patrones-adicionales-comunes)
+
+### PARTE 2 — GESTIÓN DE TAREAS CON JIRA
+
+- [Sección 9 — Introducción a Jira](#sección-9--introducción-a-jira)
+  - [9.1 Qué es Jira](#91-qué-es-jira)
+  - [9.2 Conceptos base](#92-conceptos-base)
+  - [9.3 Tipos de proyecto](#93-tipos-de-proyecto)
+  - [9.4 Cuándo usar Jira vs. alternativas](#94-cuándo-usar-jira-vs-alternativas)
+- [Sección 10 — Nomenclatura y tipos de issue en Jira](#sección-10--nomenclatura-y-tipos-de-issue-en-jira)
+  - [10.1 Tipos de issue estándar](#101-tipos-de-issue-estándar)
+  - [10.2 Campos clave de cada issue](#102-campos-clave-de-cada-issue)
+  - [10.3 Prioridades en Jira y mapeo a MoSCoW](#103-prioridades-en-jira-y-mapeo-a-moscow)
+  - [10.4 Estados y workflow típico](#104-estados-y-workflow-típico)
+  - [10.5 Tabla de nomenclatura sugerida](#105-tabla-de-nomenclatura-sugerida)
+- [Sección 11 — Configuración de un proyecto Scrum en Jira](#sección-11--configuración-de-un-proyecto-scrum-en-jira)
+  - [11.1 Crear proyecto Scrum: paso a paso](#111-crear-proyecto-scrum-paso-a-paso)
+  - [11.2 Configurar Board](#112-configurar-board)
+  - [11.3 Configurar Backlog](#113-configurar-backlog)
+  - [11.4 Crear y gestionar Sprints](#114-crear-y-gestionar-sprints)
+  - [11.5 Configurar Epics](#115-configurar-epics)
+  - [11.6 Configurar Releases (Fix Versions)](#116-configurar-releases-fix-versions)
+  - [11.7 Componentes](#117-componentes)
+- [Sección 12 — Flujo de trabajo diario con Jira](#sección-12--flujo-de-trabajo-diario-con-jira)
+  - [12.1 Sprint Planning en Jira](#121-sprint-planning-en-jira)
+  - [12.2 Daily Scrum con Jira](#122-daily-scrum-con-jira)
+  - [12.3 Durante el sprint](#123-durante-el-sprint)
+  - [12.4 Sprint Review en Jira](#124-sprint-review-en-jira)
+  - [12.5 Sprint Retrospective](#125-sprint-retrospective)
+  - [12.6 Refinamiento en Jira](#126-refinamiento-en-jira)
+  - [12.7 Diagrama del flujo diario con Jira](#127-diagrama-del-flujo-diario-con-jira)
+- [Sección 13 — Reportes y métricas en Jira](#sección-13--reportes-y-métricas-en-jira)
+  - [13.1 Velocity Chart](#131-velocity-chart)
+  - [13.2 Burndown Chart](#132-burndown-chart)
+  - [13.3 Sprint Report](#133-sprint-report)
+  - [13.4 Cumulative Flow Diagram (CFD)](#134-cumulative-flow-diagram-cfd)
+  - [13.5 Control Chart](#135-control-chart)
+  - [13.6 Dashboards personalizados](#136-dashboards-personalizados)
+  - [13.7 JQL (Jira Query Language)](#137-jql-jira-query-language)
+- [Sección 14 — Hitos (Milestones) y Releases en Jira](#sección-14--hitos-milestones-y-releases-en-jira)
+  - [14.1 Fix Versions como Milestones](#141-fix-versions-como-milestones)
+  - [14.2 Release Hub](#142-release-hub)
+  - [14.3 Mapeo al roadmap del proyecto](#143-mapeo-al-roadmap-del-proyecto)
+  - [14.4 Cómo vincular issues a releases](#144-cómo-vincular-issues-a-releases)
+  - [14.5 Release notes automáticas desde Jira](#145-release-notes-automáticas-desde-jira)
+  - [14.6 Tabla de mapeo completa SDD → Jira](#146-tabla-de-mapeo-completa-sdd--jira)
+- [Sección 15 — Integración Jira con herramientas del equipo](#sección-15--integración-jira-con-herramientas-del-equipo)
+  - [15.1 Jira + Git (GitHub/GitLab/Bitbucket)](#151-jira--git-githubgitlabbitbucket)
+  - [15.2 Jira + CI/CD](#152-jira--cicd)
+  - [15.3 Jira + Confluence](#153-jira--confluence)
+  - [15.4 Jira + Slack/Teams](#154-jira--slackteams)
+  - [15.5 Automatizaciones útiles](#155-automatizaciones-útiles)
+
+### TÉCNICAS COMPLEMENTARIAS
+
+- [Sección 16 — Técnicas Complementarias de Descomposición y Planificación Ágil](#sección-16--técnicas-complementarias-de-descomposición-y-planificación-ágil)
+  - [16.1 Introducción](#161--introducción)
+  - [16.2 Vertical Slicing](#162--vertical-slicing)
+  - [16.3 Walking Skeleton](#163--walking-skeleton)
+  - [16.4 Thin Slice / Tracer Bullet](#164--thin-slice--tracer-bullet)
+  - [16.5 Story Mapping (Jeff Patton)](#165--story-mapping-jeff-patton)
+  - [16.6 Example Mapping](#166--example-mapping)
+  - [16.7 Spike / Architectural Spike](#167--spike--architectural-spike)
+  - [16.8 ATDD (Acceptance Test-Driven Development)](#168--atdd-acceptance-test-driven-development)
+  - [16.9 Mob Programming](#169--mob-programming)
+  - [16.10 Shape Up (Basecamp)](#1610--shape-up-basecamp)
+  - [16.11 Impact Mapping (Gojko Adzic)](#1611--impact-mapping-gojko-adzic)
+  - [16.12 Dual-Track Agile](#1612--dual-track-agile)
+  - [16.13 Tabla resumen: Cuándo usar cada técnica](#1613--tabla-resumen-cuándo-usar-cada-técnica)
+
+---
+
 ## PARTE 1 — METODOLOGÍAS ÁGILES
 
 ---
@@ -494,7 +619,66 @@ Un tablero Kanban típico con WIP limits:
 
 ### Sección 6 — User Stories, Épicas y Tareas
 
+#### 6.0 Introducción — Conceptos fundamentales y vocabulario
+
+Antes de entrar en formatos y técnicas, es necesario definir con precisión los términos que se usan cotidianamente en la gestión ágil. La confusión entre estos conceptos es una de las causas más frecuentes de backlogs desordenados, sprints mal planificados e historias que no se pueden cerrar.
+
+##### Definiciones clave
+
+| Término | Definición | Quién la escribe | Scope temporal | Ejemplo rápido |
+|---|---|---|---|---|
+| **Iniciativa** | Objetivo estratégico de alto nivel que agrupa múltiples épicas. Responde al "por qué" del trabajo. | Liderazgo / Gerencia de producto | Trimestral o anual | "Aumentar la conversión de ventas online en un 25%" |
+| **Épica** | Funcionalidad grande que NO cabe en un solo sprint y se descompone en múltiples user stories. Representa una capacidad completa del producto. | Product Owner con input del equipo | Multi-sprint (2 a 8 sprints) | "Checkout de pagos" / "Motor de rendering ESC/POS" |
+| **User Story (Historia de usuario)** | Descripción corta de una funcionalidad **desde la perspectiva del usuario** que entrega valor y se puede completar en un solo sprint. Es la unidad de planificación en Scrum. | Product Owner (redacta) + equipo (refina) | 1 sprint | "Como comprador, quiero pagar con tarjeta de crédito, para completar mi compra sin efectivo" |
+| **Tarea técnica** | Trabajo de implementación necesario para completar una user story. No tiene valor de negocio por sí sola — solo tiene valor como parte de una historia. | Equipo de desarrollo | Horas a 2-3 días | "Implementar endpoint POST /api/payments" / "Escribir tests unitarios del parser" |
+| **Sub-tarea** | División de una tarea en pasos más pequeños para tracking interno del equipo. Típicamente asignada a una sola persona. | Desarrollador individual | Horas | "Crear la migración de base de datos" / "Configurar el mock del servicio de pagos" |
+| **Bug (Defecto)** | Comportamiento actual del sistema que difiere del comportamiento esperado definido en los criterios de aceptación. No es una feature nueva — es una corrección. | QA / cualquier miembro del equipo | Variable | "El parser falla con caracteres Unicode" / "El botón de pago no responde en Safari" |
+| **Spike** | Timebox de investigación para reducir incertidumbre. No produce código productivo — produce conocimiento (ADR, PoC, informe). | Equipo de desarrollo | 1-3 días (timeboxed) | "Evaluar viabilidad de rendering PDF nativo en .NET" |
+
+##### Reglas rápidas de redacción por tipo
+
+**Para User Stories:**
+- Siempre en formato: `Como [rol], quiero [acción], para [beneficio]`
+- El **rol** es quién usa la funcionalidad (no "como desarrollador" si es una feature de usuario final)
+- La **acción** es qué quiere hacer, en voz activa
+- El **beneficio** es el valor de negocio — por qué importa
+- Debe tener al menos 2 criterios de aceptación en formato Given/When/Then
+- Si no cumple INVEST (ver 6.2), no está lista para el sprint
+
+**Para Épicas:**
+- Título descriptivo que indique la capacidad completa: "Gestión de pagos", no "Pagos"
+- Incluir: objetivo, user stories hijas identificadas, criterio de éxito medible
+- Si una épica tiene más de 8-10 historias, considerar dividirla en 2 épicas
+
+**Para Tareas técnicas:**
+- Título con verbo de acción: "Implementar", "Configurar", "Crear", "Migrar"
+- Siempre vinculada a una user story (nunca huérfana)
+- Estimación en horas (no en story points) — las tareas son trabajo concreto
+- Si una tarea tarda más de 2 días, descomponerla en sub-tareas
+
+**Para Bugs:**
+- Formato: "[Componente] Descripción del comportamiento incorrecto"
+- Incluir siempre: pasos para reproducir, comportamiento actual, comportamiento esperado
+- Severidad (Blocker / Critical / Major / Minor / Trivial) y prioridad no son lo mismo
+
+##### Ejemplos en contexto web (e-commerce)
+
+| Tipo | Ejemplo en e-commerce | Ejemplo en app mobile (delivery) | Ejemplo en SaaS (CRM) |
+|---|---|---|---|
+| **Iniciativa** | Aumentar conversión de checkout en 25% | Reducir tiempo de entrega promedio en 15 min | Mejorar captación de leads en 30% |
+| **Épica** | Checkout multi-paso con pasarela de pagos | Tracking en tiempo real de pedidos | Formularios dinámicos de captura |
+| **User Story** | Como comprador, quiero guardar mi tarjeta para futuras compras, para no reingresarla cada vez | Como repartidor, quiero ver la ruta optimizada, para llegar más rápido | Como vendedor, quiero filtrar leads por industria, para priorizar mi pipeline |
+| **Tarea técnica** | Integrar API de Stripe para tokenización de tarjetas | Implementar conexión con Google Maps Directions API | Crear componente de filtro dinámico con React |
+| **Sub-tarea** | Crear migración para tabla `saved_cards` | Escribir tests de integración del servicio de rutas | Agregar índice a columna `industry` en la BD |
+| **Bug** | [Checkout] Doble cobro cuando el usuario hace doble clic en "Pagar" | [Mapa] La ruta no se actualiza al recalcular | [Filtros] El filtro por fecha no respeta timezone del usuario |
+
+---
+
 #### 6.1 Formato estándar de User Story
+
+> **Definición:** Una **User Story** (historia de usuario) es una descripción breve e informal de una funcionalidad descrita desde la perspectiva de la persona que la necesita. No es un requerimiento técnico — es una **promesa de conversación** entre el PO y el equipo sobre qué valor se va a entregar. El concepto fue introducido por Kent Beck en Extreme Programming (XP) y popularizado por Mike Cohn en *User Stories Applied* (2004).
+
+El formato estándar de redacción es:
 
 ```
 Como [rol], quiero [acción], para [beneficio]
@@ -509,7 +693,33 @@ El formato establece:
 - **Qué** necesita hacer (acción)
 - **Por qué** lo necesita (beneficio / valor de negocio)
 
+**Ejemplos en contexto web:**
+
+| Dominio | User Story |
+|---|---|
+| E-commerce | Como comprador, quiero filtrar productos por rango de precio, para encontrar artículos dentro de mi presupuesto |
+| App mobile | Como repartidor, quiero escanear el código QR del paquete, para confirmar la entrega sin tipear datos |
+| SaaS (CRM) | Como gerente de ventas, quiero ver un dashboard con el pipeline por etapa, para identificar cuellos de botella |
+| Red social | Como usuario, quiero silenciar notificaciones de un grupo, para no recibir alertas irrelevantes |
+
+**Anti-patrones de redacción (historias mal escritas):**
+
+| ❌ Mal escrita | Problema | ✅ Corregida |
+|---|---|---|
+| "Implementar API REST de productos" | No hay rol ni beneficio — es una tarea técnica disfrazada de historia | "Como comprador, quiero buscar productos por nombre, para encontrar rápidamente lo que necesito" |
+| "Como usuario, quiero que el sistema sea rápido" | No es testeable — ¿qué significa "rápido"? | "Como usuario, quiero que la búsqueda devuelva resultados en menos de 2 segundos, para no abandonar la página" |
+| "Como PO, quiero que se use React" | El PO no decide tecnología — esto es una restricción técnica, no una historia | "Como usuario, quiero una interfaz responsiva que funcione en móvil y desktop, para acceder desde cualquier dispositivo" |
+| "Como desarrollador, quiero refactorizar el módulo de pagos" | Refactoring es tarea técnica, no tiene valor de negocio directo | Registrar como tarea técnica vinculada a una US, no como US |
+
+**¿Cuándo NO usar el formato "Como/quiero/para"?**
+- **Tareas técnicas:** usar formato directo → "Configurar pipeline de CI/CD en GitHub Actions"
+- **Spikes:** usar formato de pregunta → "¿Es viable renderizar PDF con la librería X?"
+- **Bugs:** usar formato de reporte → "[Parser] Error al procesar caracteres Unicode en TextNode"
+- **Tareas de infraestructura:** formato directo → "Crear base de datos PostgreSQL en el entorno de staging"
+
 #### 6.2 Criterios INVEST
+
+> **Definición:** **INVEST** es un acrónimo creado por Bill Wake (2003) que define los 6 atributos que toda User Story bien escrita debe cumplir. Si una historia no cumple alguno de estos criterios, probablemente necesita re-escribirse o descomponerse antes de entrar al sprint. Los criterios INVEST funcionan como un **checklist de calidad** durante el refinamiento del backlog.
 
 Una buena User Story cumple los criterios INVEST:
 
@@ -524,12 +734,16 @@ Una buena User Story cumple los criterios INVEST:
 
 #### 6.3 Criterios de aceptación: formato Given/When/Then
 
-Los criterios de aceptación se escriben en formato BDD (Behavior-Driven Development):
+> **Definición:** Un **criterio de aceptación** es una condición que debe cumplirse para que una User Story se considere terminada. Define el **comportamiento esperado** del sistema en términos concretos y verificables. Sin criterios de aceptación, no hay forma objetiva de saber si la historia está completa.
+
+> **Definición:** **BDD (Behavior-Driven Development)** es una práctica de desarrollo que extiende TDD para escribir tests en un lenguaje cercano al negocio. Fue creado por Dan North (2006). El formato estándar de BDD es **Given/When/Then**, también conocido como **Gherkin** (el lenguaje que usa la herramienta Cucumber para automatizar estos tests).
+
+Los criterios de aceptación se escriben en formato BDD:
 
 ```
-Given [precondición / contexto]
-When  [acción que ejecuta el usuario o el sistema]
-Then  [resultado esperado observable]
+Given [precondición / contexto]     → el estado inicial del sistema
+When  [acción que ejecuta el usuario o el sistema]  → el evento que ocurre
+Then  [resultado esperado observable]   → lo que debe pasar como consecuencia
 ```
 
 **Ejemplo del proyecto (US-03: Parser DSL básico):**
@@ -544,7 +758,50 @@ When  el parser intenta procesarla
 Then  se lanza una excepción descriptiva con la ubicación del error
 ```
 
+**Ejemplos en contexto web:**
+
+*E-commerce — Historia: "Como comprador, quiero agregar productos al carrito"*
+```
+Given que estoy viendo la página de detalle de un producto con stock disponible
+When  hago clic en el botón "Agregar al carrito"
+Then  el producto aparece en mi carrito con cantidad 1
+And   el ícono del carrito muestra el total actualizado
+
+Given que ya tengo el producto X en el carrito con cantidad 2
+When  hago clic en "Agregar al carrito" para el mismo producto X
+Then  la cantidad del producto X en el carrito se incrementa a 3
+And   no se crea una línea duplicada
+```
+
+*App mobile — Historia: "Como repartidor, quiero confirmar la entrega"*
+```
+Given que llegué a la dirección del cliente y tengo el paquete
+When  escaneo el código QR del paquete
+Then  la entrega se marca como "completada" en el sistema
+And   el cliente recibe una notificación push de confirmación
+And   se registra la hora y ubicación GPS de la entrega
+```
+
+**¿Cuántos criterios de aceptación debería tener una historia?**
+- **Mínimo 2:** un escenario de éxito (happy path) y uno de error/borde
+- **Recomendado 3-5:** cubren los casos más relevantes sin sobrecargar
+- **Máximo 7-8:** si tiene más, la historia probablemente es demasiado grande y debería descomponerse
+- **Regla práctica:** si los criterios no caben en una tarjeta (o una pantalla), la historia es demasiado compleja
+
 #### 6.4 Jerarquía: Iniciativa → Épica → User Story → Sub-tarea → Bug
+
+Los ítems de trabajo en un proyecto ágil se organizan en una **jerarquía de descomposición** que va desde lo estratégico (por qué hacemos esto) hasta lo operativo (qué código escribo hoy). Entender esta jerarquía es fundamental para mantener la trazabilidad entre los objetivos de negocio y el trabajo diario.
+
+**Definiciones formales de cada nivel:**
+
+| Nivel | Definición | Criterio para distinguirlo |
+|---|---|---|
+| **Iniciativa** | Objetivo estratégico de alto nivel que agrupa épicas relacionadas. Define el "para qué" del esfuerzo. | Si responde a un OKR o meta de negocio → es una iniciativa |
+| **Épica** | Cuerpo de trabajo grande que entrega una **capacidad completa** del producto. No cabe en un sprint. | Si tarda más de 1 sprint → es épica. Si tiene más de 8 historias → considerar dividirla |
+| **User Story** | Funcionalidad concreta que entrega **valor al usuario** y se completa en 1 sprint. | Si se puede demostrar en la Sprint Review → es historia. Si no → es tarea o épica |
+| **Tarea técnica** | Trabajo de implementación **sin valor de negocio directo**, necesario para completar una historia. | Si el PO no la entiende ni le importa → es tarea técnica. Siempre vinculada a una US |
+| **Sub-tarea** | División de una tarea para asignación y tracking individual. | Si una sola persona la puede hacer en horas → es sub-tarea |
+| **Bug** | Diferencia entre el comportamiento **actual** y el **esperado** (según criterios de aceptación). | Si funcionaba y dejó de funcionar → bug. Si nunca funcionó así → es nueva funcionalidad |
 
 ```
 Iniciativa (Tema estratégico)
@@ -554,7 +811,7 @@ Iniciativa (Tema estratégico)
                             └── Bug (defecto encontrado)
 ```
 
-**Ejemplo concreto del proyecto:**
+**Ejemplo concreto del proyecto Motor DSL:**
 
 | Nivel | ID | Descripción |
 |---|---|---|
@@ -568,7 +825,26 @@ Iniciativa (Tema estratégico)
 
 > **Referencia:** Las épicas y user stories están en `../docs/06_backlog-tecnico/product-backlog_v1.0.md`. Las sub-tareas técnicas (BT-XXX) en `../docs/06_backlog-tecnico/backlog-tecnico_v1.0.md`.
 
+**Ejemplo en contexto web (e-commerce):**
+
+| Nivel | Ejemplo |
+|---|---|
+| **Iniciativa** | Aumentar la conversión del checkout en un 25% (OKR Q2) |
+| **Épica** | Checkout multi-paso con pasarela de pagos |
+| **User Story** | Como comprador, quiero pagar con tarjeta de crédito, para completar mi compra sin efectivo |
+| **Tarea técnica** | Integrar SDK de Stripe para tokenización de tarjetas |
+| **Sub-tarea** | Crear migración para tabla `payment_transactions` |
+| **Bug** | [Checkout] Doble cobro cuando el usuario hace doble clic en "Pagar" |
+
+**Regla práctica para clasificar:** Si no sabés si algo es épica, historia o tarea, preguntate: *¿Se puede demostrar al PO en la Sprint Review?* Si la respuesta es sí y cabe en un sprint → es historia. Si la respuesta es sí pero no cabe en un sprint → es épica. Si la respuesta es no → es tarea técnica.
+
 #### 6.5 Estimación
+
+> **Definición:** **Estimación** en el contexto ágil es el proceso de asignar un valor relativo de esfuerzo, complejidad y riesgo a un ítem del backlog. No es una "promesa de entrega" — es una herramienta de **planificación** que ayuda al equipo a decidir cuánto trabajo cabe en un sprint. Las estimaciones ágiles son deliberadamente imprecisas: se busca estar "aproximadamente correcto" en lugar de "precisamente incorrecto".
+
+> **Definición:** Los **Story Points** (puntos de historia) son una unidad abstracta de medida que combina tres factores: **complejidad** (qué tan difícil es), **esfuerzo** (cuánto trabajo implica) e **incertidumbre** (cuánto desconocemos). No se traducen directamente a horas — un ítem de 5 SP puede tardar 4 horas para un senior y 12 horas para un junior, pero el equipo asigna los mismos 5 SP.
+
+> **Definición:** La **Velocity** (velocidad) es la cantidad promedio de Story Points que un equipo completa por sprint. Se calcula sobre los últimos 3-5 sprints. Se usa para predecir cuánto trabajo cabe en el próximo sprint. No es una métrica de productividad — es una métrica de **capacidad de planificación**.
 
 ##### Story Points vs. Horas
 
@@ -580,6 +856,8 @@ Iniciativa (Tema estratégico)
 | **Uso recomendado** | Planificación de sprints, velocity | Tracking personal, timeboxing de spikes |
 
 ##### Planning Poker
+
+> **Definición:** **Planning Poker** (también llamado Scrum Poker) es una técnica de estimación por consenso creada por James Grenning (2002) y popularizada por Mike Cohn. Combina la opinión experta de cada miembro del equipo con la discusión grupal para llegar a estimaciones más precisas que las individuales. El uso de cartas evita el sesgo de anclaje (que un estimador influya en los demás).
 
 Técnica de estimación grupal:
 1. El PO presenta la historia
@@ -604,7 +882,13 @@ Técnica de estimación grupal:
 
 #### 6.6 Priorización
 
+> **Definición:** **Priorización** es el acto de decidir el **orden** en que se implementan los ítems del backlog. Es responsabilidad principal del **Product Owner**, quien balancea valor de negocio, riesgo técnico, dependencias y feedback de stakeholders. Un backlog sin priorización explícita es una lista de deseos — no una herramienta de planificación.
+
+Existen varias técnicas de priorización, cada una útil en contextos diferentes:
+
 ##### MoSCoW
+
+> **Definición:** **MoSCoW** es un método de priorización creado por Dai Clegg (1994) en el contexto de DSDM (Dynamic Systems Development Method). Clasifica cada ítem del backlog en una de 4 categorías según su importancia para el release actual. El nombre es un acrónimo: **M**ust have, **S**hould have, **C**ould have, **W**on't have.
 
 | Categoría | Significado | Distribución sugerida | Ejemplo del proyecto |
 |---|---|---|---|
@@ -613,7 +897,18 @@ Técnica de estimación grupal:
 | **Could Have** | Deseable si sobra capacidad | ~20% del esfuerzo | US-27 (Render PDF) |
 | **Won't Have** | Explícitamente fuera de alcance para esta versión | 0% | Editor visual, scripting avanzado |
 
+**Ejemplo MoSCoW en contexto web (e-commerce):**
+
+| Categoría | Ejemplo e-commerce |
+|---|---|
+| **Must** | Carrito de compras, checkout, registro de usuario |
+| **Should** | Favoritos, historial de compras, reviews de productos |
+| **Could** | Recomendaciones personalizadas, comparador de productos |
+| **Won't** | Marketplace multi-vendor, programa de lealtad (v2.0) |
+
 ##### WSJF (Weighted Shortest Job First)
+
+> **Definición:** **WSJF** (Weighted Shortest Job First) es una técnica de priorización numérica del framework SAFe (Scaled Agile Framework). Calcula una puntuación que favorece ítems de **alto valor y bajo esfuerzo**, optimizando el retorno económico del trabajo. Es especialmente útil cuando hay muchos ítems compitiendo por recursos limitados.
 
 Fórmula de priorización de SAFe:
 
@@ -622,6 +917,8 @@ $$WSJF = \frac{\text{Valor de negocio} + \text{Criticidad temporal} + \text{Redu
 Se usa para comparar ítems del backlog: el ítem con mayor WSJF se hace primero.
 
 ##### Value vs. Effort
+
+> **Definición:** La **Matriz Value vs. Effort** (Valor vs. Esfuerzo) es una herramienta visual de priorización rápida que clasifica los ítems del backlog en 4 cuadrantes según dos ejes: cuánto valor aportan al negocio y cuánto esfuerzo requieren. Es más simple que WSJF y útil para sesiones de priorización con stakeholders no técnicos.
 
 Matriz 2x2 para priorización rápida:
 
@@ -1368,11 +1665,682 @@ Jira Automation permite reglas sin código:
 
 ---
 
+## Sección 16 — Técnicas Complementarias de Descomposición y Planificación Ágil
+
+### 16.1 — Introducción
+
+Las metodologías ágiles como Scrum y Kanban definen **marcos de trabajo** — roles, ceremonias, artefactos, cadencias — pero no especifican **cómo descomponer el trabajo** para que cada incremento entregue valor real. Scrum dice "hacer sprints con historias priorizadas" pero no dice cómo transformar una funcionalidad grande en historias que atraviesen toda la arquitectura y sean demostrables en una Sprint Review.
+
+Este vacío metodológico genera problemas recurrentes:
+
+- Historias que son "capas horizontales" (toda la UI, toda la API) en lugar de funcionalidades completas
+- Backlogs extensos sin una visión clara de cómo las historias se conectan con el flujo del usuario
+- Criterios de aceptación vagos que generan retrabajo después del sprint
+- Sprints de investigación sin output claro
+- Equipos que no saben cómo estimar porque la incertidumbre técnica es demasiado alta
+
+Las técnicas complementarias que se presentan en esta sección **llenan ese vacío**. No reemplazan a Scrum ni a Kanban — los complementan con prácticas concretas para cortar, organizar, refinar y validar el trabajo.
+
+**Tabla resumen de técnicas:**
+
+| Técnica | Categoría | En qué ayuda | Cuándo usarla |
+|---|---|---|---|
+| Vertical Slicing | Descomposición | Cortar funcionalidades end-to-end | Al crear user stories |
+| Walking Skeleton | Arquitectura incremental | Validar la arquitectura con un path completo mínimo | Inicio del proyecto / MVP |
+| Thin Slice / Tracer Bullet | Arquitectura incremental | Reducir riesgo técnico temprano | Sprint 1 o cuando hay incertidumbre arquitectónica |
+| Story Mapping | Planificación visual | Organizar el backlog por flujo de usuario | Refinamiento, planificación de releases |
+| Example Mapping | Refinamiento de historias | Clarificar historias con ejemplos concretos | Refinamiento pre-sprint |
+| Spike / Architectural Spike | Reducción de incertidumbre | Investigar antes de comprometer | Cuando la estimación es imposible |
+| ATDD | Calidad integrada | Definir criterios de aceptación ejecutables | Antes de codear cada historia |
+| Mob Programming | Colaboración | Resolver problemas complejos en equipo | Onboarding, problemas cross-cutting |
+| Shape Up | Framework alternativo | Ciclos largos con scope flexible | Equipos con poca ceremonia |
+| Impact Mapping | Planificación estratégica | Conectar entregas con objetivos de negocio | Inicio del proyecto, planificación de roadmap |
+| Dual-Track Agile | Discovery + Delivery | Separar investigación de construcción | Productos con alta incertidumbre de mercado |
+
+---
+
+### 16.2 — Vertical Slicing
+
+#### Qué es
+
+Una **rebanada vertical** (vertical slice) es una porción de funcionalidad que atraviesa **todas las capas de la arquitectura** — desde la interfaz/entrada hasta el almacenamiento/salida — y entrega una funcionalidad completa de punta a punta, aunque sea mínima. El concepto se contrapone al "horizontal slicing" donde cada sprint completa una capa entera (toda la UI, toda la API, toda la base de datos) sin entregar valor funcional hasta que todas las capas se integran.
+
+#### Contraste con Horizontal Slicing
+
+```
+HORIZONTAL SLICING (anti-patrón):        VERTICAL SLICING (recomendado):
+┌─────────────────────────┐              ┌───┬───┬───┬───────────┐
+│      UI completa        │ Sprint 1     │ U │ U │ U │           │
+├─────────────────────────┤              │ I │ I │ I │           │
+│      API completa       │ Sprint 2     ├───┼───┼───┤    ...    │
+├─────────────────────────┤              │ A │ A │ A │           │
+│    Lógica completa      │ Sprint 3     │ P │ P │ P │           │
+├─────────────────────────┤              │ I │ I │ I │           │
+│     Datos completo      │ Sprint 4     ├───┼───┼───┤           │
+└─────────────────────────┘              │ D │ D │ D │           │
+                                         │ B │ B │ B │           │
+Valor entregado: Sprint 4               └───┴───┴───┴───────────┘
+                                         S1   S2   S3
+                                         Valor entregado: Sprint 1
+```
+
+En el anti-patrón horizontal, el equipo trabaja 4 sprints antes de poder demostrar algo funcional. En el enfoque vertical, **cada sprint entrega una funcionalidad completa** (aunque limitada) que se puede demostrar en la Sprint Review.
+
+#### Ejemplo concreto del proyecto Motor DSL
+
+**HORIZONTAL (anti-patrón) — cómo NO se hizo:**
+
+| Sprint | Qué se hubiera entregado | Valor para el usuario |
+|---|---|---|
+| Sprint 1 | Todo el parser (CU-01 a CU-03 completos) | ❌ Ninguno — no se puede ejecutar nada |
+| Sprint 2 | Todo el evaluator (CU-05 a CU-08 completos) | ❌ Ninguno — no hay rendering |
+| Sprint 3 | Todo el layout + rendering | ✅ Recién ahora se puede ver un resultado |
+
+**VERTICAL (como se planificó) — enfoque correcto:**
+
+| Sprint | Qué se entrega | Valor para el usuario |
+|---|---|---|
+| Sprint 01 | Parser básico → AST mínimo → estructura base funcional (US-01 + US-02 + US-03 + US-04) | ✅ Pipeline mínimo demostrable |
+| Sprint 02 | Evaluator de variables → condicionales → loops → AST evaluado (US-05 a US-08) | ✅ Plantillas con datos dinámicos |
+| Sprint 03 | Layout + first render ESC/POS (US-09 a US-12) | ✅ Documento imprimible |
+
+El roadmap del proyecto aplica vertical slicing desde la Fase 1 (MVP): entrega un pipeline completo **DSL → AST → Evaluación → Render**, no "toda una capa". Cada sprint agrega profundidad al pipeline manteniendo la capacidad de generar output funcional.
+
+> 📎 Referencia: `docs/00_contexto/roadmap-producto_v1.0.md` — Fase 1 (Sprints 01–04)
+
+#### Reglas prácticas para hacer vertical slicing
+
+1. **Identificar el flujo más simple** que atraviese todas las capas de la arquitectura
+2. **Reducir el scope de cada capa** al mínimo viable para ese flujo (un solo tipo de nodo, un solo formato de salida)
+3. **Cada slice debe ser demostrable** en una Sprint Review — si no se puede demostrar, es demasiado técnico
+4. **Si un slice no tiene output visible**, re-cortar hasta que lo tenga
+5. **Priorizar slices por riesgo** — los que validan decisiones arquitectónicas van primero
+
+---
+
+### 16.3 — Walking Skeleton
+
+#### Qué es
+
+Un **walking skeleton** es el primer vertical slice del proyecto — una implementación mínima que recorre toda la arquitectura end-to-end. No tiene funcionalidad real completa, pero demuestra que **las capas se conectan** y que el pipeline funciona de punta a punta. El término fue acuñado por Alistair Cockburn.
+
+El skeleton "camina" — es decir, se ejecuta — pero apenas hace algo útil. Su valor no está en la funcionalidad que entrega sino en la **validación arquitectónica** que provee.
+
+#### Ejemplo concreto del proyecto Motor DSL
+
+El Sprint 01 fue el walking skeleton del Motor DSL:
+
+| Componente | Qué se implementó | Qué NO se implementó |
+|---|---|---|
+| Template DSL | Un JSON mínimo con un solo TextNode | Tablas, imágenes, condicionales |
+| Parser | Deserialización básica JSON → nodo | Validación de schema, errores descriptivos |
+| AST | DocumentNode con un hijo TextNode | Nodos complejos, anidamiento profundo |
+| Estructura base | Solución .NET, proyecto, interfaces | Evaluator, Layout, Renderers |
+
+```
+Walking Skeleton (Sprint 01):
+┌──────────┐    ┌─────────┐    ┌──────────┐    ┌──────────┐
+│ Template │───►│ Parser  │───►│   AST    │───►│ Procesar │──► Output
+│ JSON     │    │ (básico)│    │ (mínimo) │    │ plantilla│
+└──────────┘    └─────────┘    └──────────┘    └──────────┘
+     ▲                                              │
+     │            Todas las capas conectadas         │
+     └───────────── valor demostrable ◄──────────────┘
+```
+
+**Resultado:** Al final del Sprint 01, el equipo pudo ejecutar el motor con una plantilla DSL mínima y obtener un resultado procesado. La arquitectura estaba validada; los sprints siguientes agregaron profundidad sin cambiar la estructura fundamental.
+
+> 📎 Referencia: `docs/07_plan-sprint/plan-iteracion_sprint-01_v1.0.md`
+
+#### Diferencia con MVP
+
+| Concepto | Walking Skeleton | MVP (Minimum Viable Product) |
+|---|---|---|
+| Objetivo | Validar la **arquitectura** | Validar el **producto** con usuarios reales |
+| Audiencia | El equipo de desarrollo | Usuarios / stakeholders |
+| Output | Pipeline funcional mínimo | Producto usable con valor de negocio |
+| Cuándo | Sprint 1 | Fin de Fase 1 (Sprint 04 en este proyecto) |
+| Criterio de éxito | "Las capas se conectan" | "El usuario puede resolver su problema" |
+
+El walking skeleton es un paso **técnico** — un medio para llegar al MVP. El MVP es un paso de **negocio** — el primer producto que valida hipótesis de mercado.
+
+---
+
+### 16.4 — Thin Slice / Tracer Bullet
+
+#### Qué es
+
+Un **tracer bullet** (bala trazadora) es un path de implementación que "ilumina" toda la cadena desde el input hasta el output. El término viene de *The Pragmatic Programmer* (Hunt & Thomas, 1999): así como una bala trazadora muestra al tirador la trayectoria real del disparo, un tracer bullet en software muestra si las decisiones tecnológicas y arquitectónicas funcionan de punta a punta **en condiciones reales** (no en un PoC aislado).
+
+Se diferencia del walking skeleton en un matiz: el tracer bullet pone énfasis en **validar decisiones técnicas** específicas, no solo en conectar capas.
+
+#### Cuándo usarlo
+
+- Cuando hay **incertidumbre sobre si las tecnologías elegidas se integran** bien entre sí
+- Cuando el equipo **no tiene experiencia previa** con el stack tecnológico
+- Para **validar performance assumptions** antes de comprometer sprints enteros
+- Cuando el cliente pregunta "¿realmente se puede hacer esto?" y necesitás una respuesta concreta
+
+#### Ejemplo del proyecto Motor DSL
+
+Los casos de uso CU-01 (Interpretar plantilla DSL) + CU-03 (Construir modelo interno) + CU-07 (Renderizar texto plano) juntos forman un tracer bullet que valida la pregunta técnica clave:
+
+> *"¿Podemos ir de un JSON DSL a un output renderizado usando el pipeline de .NET con el modelo de AST propuesto?"*
+
+```
+Tracer Bullet del Motor DSL:
+
+  ┌─────────────────────────────────────────────────────────────┐
+  │                    PREGUNTA A VALIDAR:                      │
+  │  "¿El pipeline DSL → Parser → AST → Renderer funciona?"    │
+  └─────────────────────────────────────────────────────────────┘
+                              │
+  ┌──────────┐  ┌──────────┐  ▼  ┌──────────┐  ┌──────────┐
+  │  CU-01   │─►│  CU-03   │───►│  CU-05   │─►│  CU-07   │
+  │ Cargar   │  │ Construir│    │ Generar  │  │ Render   │
+  │ template │  │ modelo   │    │ represent│  │ texto    │
+  └──────────┘  └──────────┘    └──────────┘  └──────────┘
+       │              │              │              │
+       ▼              ▼              ▼              ▼
+    JSON DSL    AST mínimo     Documento     Texto plano
+    válido      funcional      abstracto     verificable
+```
+
+Si el tracer bullet falla (por ejemplo, si el parser no puede manejar la estructura DSL propuesta), se descubre en el Sprint 01 — no en el Sprint 04 cuando ya se invirtieron semanas de trabajo.
+
+> 📎 Referencia: `docs/05_arquitectura_tecnica/arquitectura-solucion_v1.0.md` — Pipeline del motor
+
+---
+
+### 16.5 — Story Mapping (Jeff Patton)
+
+#### Qué es
+
+**Story Mapping** es una técnica visual de organización del backlog en dos ejes:
+
+- **Eje X (horizontal):** flujo del usuario — las actividades principales que el usuario realiza en secuencia
+- **Eje Y (vertical):** profundidad de detalle — desde la funcionalidad mínima hasta las variantes más completas
+
+El backbone (línea superior) representa las actividades principales. Debajo de cada actividad se apilan las historias de usuario, ordenadas de arriba (más prioritaria / mínima) hacia abajo (más completa / menos urgente). Se trazan líneas horizontales que definen los releases: todo lo que está sobre la primera línea es Release 1, lo que está entre la primera y la segunda línea es Release 2, etc.
+
+#### Diagrama ASCII de un Story Map aplicado al proyecto
+
+```
+BACKBONE (actividades del pipeline del Motor DSL):
+──────────────────────────────────────────────────────────────────────
+ Crear       │  Cargar     │  Procesar   │  Renderizar  │ Imprimir
+ Template    │  Datos      │  DSL / AST  │  Documento   │ / Output
+──────────────────────────────────────────────────────────────────────
+              │             │             │              │
+RELEASE 1     │             │             │              │
+(Fase 1 MVP): │             │             │              │
+ Texto        │ JSON        │ TextNode    │ Texto plano  │ Consola
+ simple       │ estático    │ básico      │ ESC/POS      │
+─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─
+RELEASE 2     │             │             │              │
+(Fase 2):     │             │             │              │
+ Tablas,      │ Variables   │ Condicional │ ESC/POS      │ Bluetooth
+ imágenes     │ dinámicas   │ Loop        │ PDF          │
+─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─
+RELEASE 3     │             │             │              │
+(Fase 3):     │             │             │              │
+ DSL v2,      │ APIs        │ Extensible  │ Custom       │ Cloud
+ visual       │ externas    │ plugins     │ renderers    │
+```
+
+#### Ejemplo del proyecto
+
+Las épicas del roadmap se mapean directamente a un Story Map:
+
+- **Backbone:** las actividades del pipeline — Crear Template → Parsear → Evaluar → Layout → Render → Output
+- **Release 1 (Fase 1 — Sprints 01 a 04):** funcionalidad mínima por cada actividad — parser básico, AST con TextNode, rendering a texto plano y ESC/POS
+- **Release 2 (Fase 2 — Sprints 05 a 06):** profundidad agregada — multi-formato, extensibilidad, integración .NET MAUI
+- **Release 3 (Fase 3 — Sprints 07 a 08):** funcionalidades avanzadas — PDF, Bluetooth, documentación completa
+
+> 📎 Referencia: `docs/00_contexto/roadmap-producto_v1.0.md` y `docs/06_backlog-tecnico/product-backlog_v1.0.md`
+
+#### Cuándo usarlo
+
+- **Al inicio del proyecto** para visualizar el scope completo y definir releases
+- **En refinamientos** para identificar qué slices faltan en una actividad
+- **Para comunicar el plan** al PO y stakeholders de forma visual — un Story Map es más intuitivo que una lista plana de user stories
+- **Cuando el backlog crece** y se pierde la noción de cómo las historias se conectan entre sí
+
+---
+
+### 16.6 — Example Mapping
+
+#### Qué es
+
+**Example Mapping** es una técnica de refinamiento de historias que usa tarjetas de 4 colores para clarificar qué significa exactamente una user story antes de comprometerla en un sprint:
+
+- 🟡 **Amarillo:** la User Story que se está refinando
+- 🔵 **Azul:** las Reglas de negocio que la historia debe cumplir
+- 🟢 **Verde:** los Ejemplos concretos que ilustran cada regla (instancias específicas con datos reales)
+- 🔴 **Rojo:** las Preguntas o incertidumbres que surgen durante la sesión
+
+La sesión dura **25-30 minutos** por historia. Si hay más de 3 tarjetas rojas (preguntas sin resolver), la historia **no está lista** para el sprint — necesita más investigación (posiblemente un spike).
+
+#### Ejemplo del proyecto — US-05: Evaluar variables simples en el AST
+
+```
+🟡 US-05: Como desarrollador, quiero evaluar variables simples en nodos
+          del AST, para reemplazar placeholders con datos reales
+
+🔵 Regla 1: El evaluator debe reemplazar variables {{variable}} con datos del contexto
+  🟢 Ejemplo 1.1: {{nombre}} con datos {nombre: "Juan"} → "Juan"
+  🟢 Ejemplo 1.2: {{total}} con datos {total: 1500.50} → "1500.50"
+  🟢 Ejemplo 1.3: {{empresa.nombre}} (nested) con datos {empresa: {nombre: "ACME"}} → "ACME"
+
+🔵 Regla 2: El evaluator debe manejar variables ausentes de forma configurable
+  🟢 Ejemplo 2.1: {{telefono}} sin datos, modo estricto → error descriptivo
+  🟢 Ejemplo 2.2: {{telefono}} sin datos, modo permisivo → mantener "{{telefono}}"
+
+🔵 Regla 3: El evaluator debe procesar todos los TextNode del AST
+  🟢 Ejemplo 3.1: AST con 3 TextNode, cada uno con variables → los 3 resueltos
+  🟢 Ejemplo 3.2: AST con TextNode sin variables → sin cambios, sin error
+
+🔴 Pregunta: ¿Se soportan filtros/pipes en variables? Ej: {{total | currency}}
+🔴 Pregunta: ¿Hay límite de profundidad para nested properties?
+🔴 Pregunta: ¿Qué formato de fecha se usa para variables de tipo DateTime?
+```
+
+**Resultado de la sesión:** Si las preguntas rojas se resuelven, la historia está lista (cumple el DoR). Si no, se agenda un spike o se escala al PO.
+
+> 📎 Referencia: `docs/06_backlog-tecnico/definition-of-ready_v1.0.md` — criterios que Example Mapping ayuda a cumplir
+
+#### Cuándo usarlo
+
+- En la **sesión de refinamiento**, 1-2 sprints antes de comprometer la historia
+- Cuando los **criterios de aceptación son vagos** o están expresados como "funcionar correctamente"
+- Cuando hay **muchas reglas de negocio** que interactúan y se necesita desambiguar
+- Cuando el **PO y el equipo** no están alineados sobre el scope exacto de una historia
+
+---
+
+### 16.7 — Spike / Architectural Spike
+
+#### Qué es
+
+Un **spike** es un timebox de investigación (típicamente 1-3 días o un porcentaje del sprint) cuyo objetivo es **reducir incertidumbre** técnica o funcional antes de comprometer una historia de usuario. El término viene de Extreme Programming (XP).
+
+A diferencia de una user story, un spike **no entrega funcionalidad** — entrega **conocimiento**: una decisión documentada (ADR), un Proof of Concept descartable, un informe con hallazgos.
+
+#### Tipos de spike
+
+| Tipo | Pregunta que responde | Output esperado |
+|---|---|---|
+| **Funcional** | ¿Se puede hacer X con la tecnología Y? | PoC descartable + informe |
+| **Arquitectónico** | ¿Cómo se integra el componente A con B? | ADR (Architecture Decision Record) |
+| **De performance** | ¿El approach elegido escala a N registros? | Benchmark + métricas |
+| **De UX** | ¿Los usuarios entienden la interfaz propuesta? | Resultados de test de usabilidad |
+
+#### Ejemplo del proyecto Motor DSL
+
+Un spike relevante para el proyecto sería evaluar la viabilidad de renderizado PDF:
+
+```
+┌──────────────────────────────────────────────────────────────┐
+│  SPIKE: Evaluar viabilidad de rendering PDF nativo           │
+├──────────────────────────────────────────────────────────────┤
+│  ID:        SP-01                                            │
+│  Tipo:      Arquitectónico / Funcional                       │
+│  Timebox:   2 días (16 horas)                                │
+│  Pregunta:  ¿Se puede generar PDF desde .NET sin             │
+│             dependencias de terceros costosas?                │
+│  Output:    ADR con decisión Go/No-Go para CU-09             │
+│  Criterio:  Go si existe librería open-source estable;       │
+│             No-Go si requiere licencia comercial > USD 500    │
+├──────────────────────────────────────────────────────────────┤
+│  Resultado: Decisión documentada — PDF condicional           │
+│             (se implementa solo si es viable sin terceros)    │
+└──────────────────────────────────────────────────────────────┘
+```
+
+> 📎 Referencia: `docs/05_arquitectura_tecnica/decisiones-arquitectura_v1.0.md`
+
+#### Formato de un spike en el backlog
+
+| ID | Tipo | Descripción | Timebox | Output esperado |
+|---|---|---|---|---|
+| SP-01 | Spike Arquitectónico | Evaluar viabilidad PDF nativo en .NET | 2 días | ADR con decisión Go/No-Go |
+| SP-02 | Spike de Performance | Benchmark de parsing para templates > 100 nodos | 1 día | Informe con métricas |
+| SP-03 | Spike Funcional | Evaluar impresión Bluetooth desde .NET MAUI | 2 días | PoC + informe de compatibilidad |
+
+#### Regla clave
+
+Un spike **NO produce código productivo** — produce conocimiento. El código productivo se implementa en una user story separada que se crea después del spike, ya con la incertidumbre resuelta. Si un spike produce código que se sube a producción, no era un spike — era una historia mal clasificada.
+
+---
+
+### 16.8 — ATDD (Acceptance Test-Driven Development)
+
+#### Qué es
+
+**ATDD** (Acceptance Test-Driven Development) es una extensión del TDD donde los **criterios de aceptación** de la user story se escriben como **tests ejecutables ANTES de codear**. Los tests los co-escribe el trío: PO + Dev + QA (las "tres amigos").
+
+La diferencia fundamental con TDD clásico:
+
+| Aspecto | TDD | ATDD |
+|---|---|---|
+| Quién escribe los tests | El desarrollador | PO + Dev + QA (colaborativo) |
+| Tipo de test | Unitario (técnico) | De aceptación (funcional) |
+| Qué guía | El diseño del código | El comportamiento del sistema |
+| Nivel de abstracción | Método / clase | Historia de usuario completa |
+| Lenguaje | Código técnico | Given/When/Then (Gherkin) |
+| Complementarios | Sí — ATDD no reemplaza TDD | Sí — TDD no reemplaza ATDD |
+
+#### Flujo ATDD
+
+```
+  ┌─────────────────────────────┐
+  │  1. PO + Dev + QA definen   │
+  │     criterios de aceptación │
+  │     en Given/When/Then      │
+  └─────────────┬───────────────┘
+                │
+  ┌─────────────▼───────────────┐
+  │  2. QA/Dev escriben test    │
+  │     automatizado (ROJO)     │
+  └─────────────┬───────────────┘
+                │
+  ┌─────────────▼───────────────┐
+  │  3. Dev implementa el       │
+  │     mínimo para pasar       │
+  │     el test (VERDE)         │
+  └─────────────┬───────────────┘
+                │
+  ┌─────────────▼───────────────┐
+  │  4. Refactor sin romper     │
+  │     el test de aceptación   │
+  └─────────────┬───────────────┘
+                │
+  ┌─────────────▼───────────────┐
+  │  5. Criterio de aceptación  │
+  │     cumplido ✅              │
+  └─────────────────────────────┘
+```
+
+#### Ejemplo del proyecto — US-03: Parser DSL básico
+
+Criterio de aceptación de la US-03 expresado como test ATDD:
+
+```
+Feature: Parser DSL básico
+
+  Scenario: Parsear un template con un solo TextNode
+    Given un template JSON DSL válido con un nodo de tipo "text"
+      """
+      {
+        "type": "document",
+        "children": [
+          { "type": "text", "content": "Hola mundo" }
+        ]
+      }
+      """
+    When el parser procesa el template
+    Then el AST resultante contiene un DocumentNode raíz
+    And el DocumentNode tiene exactamente 1 hijo de tipo TextNode
+    And el TextNode tiene content igual a "Hola mundo"
+
+  Scenario: Rechazar un template JSON malformado
+    Given un template JSON DSL con sintaxis inválida
+      """
+      { "type": "document", "children": [ }
+      """
+    When el parser procesa el template
+    Then se lanza un error de tipo ParseException
+    And el mensaje de error indica la posición del error de sintaxis
+```
+
+La estrategia de testing del proyecto define una pirámide de 70% tests unitarios, 20% tests de integración y 10% tests end-to-end. ATDD opera principalmente en el nivel de **integración y E2E**, complementando los tests unitarios que escribe el desarrollador con TDD.
+
+> 📎 Referencia: `docs/08_calidad_y_pruebas/estrategia-testing-motor_v1.0.md`
+
+---
+
+### 16.9 — Mob Programming
+
+#### Qué es
+
+**Mob Programming** (o "programming mob") es una práctica donde **todo el equipo** trabaja en el mismo problema, en la misma máquina, al mismo tiempo. Una persona actúa como **driver** (escribe código) y el resto son **navigators** (guían las decisiones). El rol de driver rota cada **10-15 minutos** usando un timer.
+
+La idea central es que la comunicación más eficiente ocurre cuando todos trabajan en el mismo contexto al mismo tiempo, eliminando las demoras por handoffs, code reviews asíncronos y reuniones de alineación.
+
+#### Cuándo usarlo
+
+| Situación | ¿Mob Programming? | Justificación |
+|---|---|---|
+| Onboarding de nuevos miembros | ✅ Sí | El nuevo miembro aprende el codebase en contexto |
+| Decisión de arquitectura cross-cutting | ✅ Sí | Todos deben entender y comprometerse con la decisión |
+| Debugging de un problema complejo | ✅ Sí | Múltiples perspectivas aceleran el diagnóstico |
+| Definición de interfaces compartidas | ✅ Sí | Evita retrabajo por contratos mal comunicados |
+| Tarea rutinaria bien conocida | ❌ No | Una sola persona es más eficiente |
+| Tareas paralelizables sin dependencias | ❌ No | Se desperdicia capacidad del equipo |
+| Trabajo individual que requiere concentración | ❌ No | El mob puede ser disruptivo |
+
+#### Ejemplo hipotético del proyecto Motor DSL
+
+El equipo hace una sesión de mob programming de 2 horas para definir la interfaz `IDocumentRenderer`, porque todos los renderers del proyecto dependen de ella:
+
+```
+Sesión de Mob Programming: Definir IDocumentRenderer
+──────────────────────────────────────────────────────
+Participantes: 4 desarrolladores + 1 QA
+Duración: 2 horas (rotación cada 15 min = 8 rotaciones)
+Artefacto: Interfaz IDocumentRenderer + tests de contrato
+
+Resultado:
+  - Interfaz acordada por todo el equipo
+  - 4 implementaciones planificadas: EscPosRenderer, TextRenderer,
+    UiRenderer, PdfRenderer
+  - Tests de contrato que toda implementación debe pasar
+  - 0 ambigüedades → se evitó retrabajo posterior
+
+Sin mob, este diseño hubiera requerido:
+  - 1 dev diseña la interfaz (2h)
+  - Code review (1h de espera + 30min de review)
+  - Feedback → cambios → re-review (2h)
+  - Stand-up para alinear al equipo (15min × 3 días)
+  Total: ~8h distribuidas en 3 días vs. 2h concentradas
+```
+
+> 📎 Referencia: `docs/05_arquitectura_tecnica/contratos-del-motor_v1.0.md` — contratos e interfaces del motor
+
+---
+
+### 16.10 — Shape Up (Basecamp)
+
+#### Qué es
+
+**Shape Up** es un framework alternativo a Scrum creado por Basecamp (Ryan Singer, 2019). Se basa en ciclos de **6 semanas** (no sprints de 2) con un **appetite** (presupuesto de tiempo) fijo. El equipo tiene autonomía total sobre cómo entregar dentro del appetite — no hay daily standups, no hay sprint planning detallado, no hay burndown charts.
+
+#### Conceptos clave
+
+| Concepto | Descripción |
+|---|---|
+| **Appetite** | Cuánto tiempo estamos **dispuestos** a invertir en una funcionalidad. No es una estimación (cuánto tardará) sino una **decisión** (cuánto vale invertir). |
+| **Pitch** | Propuesta de funcionalidad que incluye: problema, solución resumida, rabbit holes identificados y no-gos explícitos. |
+| **Betting Table** | El liderazgo "apuesta" en qué pitches invertir en el próximo ciclo. No hay backlog permanente — los pitches que no se seleccionan se descartan. |
+| **Cooldown** | 2 semanas entre ciclos para deuda técnica, exploración libre, bug fixing, capacitación. |
+| **Hill Chart** | Visualización del progreso con una "colina": subiendo = descubriendo (fase de incertidumbre), bajando = ejecutando (fase de certeza). |
+
+#### Tabla comparativa Shape Up vs. Scrum
+
+| Aspecto | Scrum | Shape Up |
+|---|---|---|
+| Cadencia | 1-4 semanas (sprint) | 6 semanas (cycle) + 2 cooldown |
+| Estimación | Story Points / Planning Poker | Appetite (presupuesto de tiempo) |
+| Roles formales | PO, SM, Dev Team | Shapers, Builders |
+| Backlog | Product Backlog mantenido y priorizado | No hay backlog permanente — pitches frescos cada ciclo |
+| Ceremonias | 5 eventos formales (Planning, Daily, Review, Retro, Refinement) | Betting table + kickoff |
+| Tracking | Burndown chart, velocity | Hill chart |
+| Autonomía del equipo | Media (sprint scope fijo, daily obligatorio) | Alta (cómo entregar es decisión del equipo) |
+| Scope del trabajo | User stories estimadas | Pitches con appetite y no-gos |
+| Manejo de riesgos | Impediments → SM los remueve | Rabbit holes → identificados en el pitch |
+
+#### Cuándo considerar Shape Up
+
+- Equipos **maduros y autónomos** que sienten que Scrum tiene demasiada ceremonia
+- Productos **estables** donde las funcionalidades son grandes y autocontenidas
+- Equipos **pequeños** (2-3 personas) donde los roles formales de Scrum no tienen sentido
+- Organizaciones que quieren **eliminar el backlog infinito** y forzar decisiones frescas cada ciclo
+
+#### Cuándo NO usar Shape Up
+
+- Equipos nuevos que necesitan la estructura de Scrum para aprender a ser ágiles
+- Proyectos con requisitos regulatorios estrictos que necesitan trazabilidad detallada
+- Equipos grandes (> 8 personas) donde la coordinación requiere ceremonias explícitas
+
+---
+
+### 16.11 — Impact Mapping (Gojko Adzic)
+
+#### Qué es
+
+**Impact Mapping** es una técnica de planificación estratégica que conecta los entregables técnicos con los objetivos de negocio a través de una cadena de 4 niveles: **Goal → Actors → Impacts → Deliverables**. Fue popularizada por Gojko Adzic en su libro *Impact Mapping* (2012).
+
+La pregunta que responde es: **¿Por qué estamos construyendo esto?** Si un deliverable no se puede conectar con un goal de negocio a través de un actor y un impacto, probablemente no debería estar en el backlog.
+
+#### Diagrama ASCII
+
+```
+                    ┌─────────────────────┐
+                    │       GOAL          │
+                    │ Reducir costos de   │
+                    │ impresión en 40%    │
+                    └─────────┬───────────┘
+                              │
+              ┌───────────────┼───────────────┐
+              ▼               ▼               ▼
+        ┌───────────┐  ┌───────────┐  ┌───────────┐
+        │  ACTOR    │  │  ACTOR    │  │  ACTOR    │
+        │ Desarrolla│  │ Operador  │  │ Gerente   │
+        │ dor       │  │ de campo  │  │ de IT     │
+        └─────┬─────┘  └─────┬─────┘  └─────┬─────┘
+              │               │               │
+        ┌─────▼─────┐  ┌─────▼─────┐  ┌─────▼─────┐
+        │  IMPACT   │  │  IMPACT   │  │  IMPACT   │
+        │ Diseñar   │  │ Imprimir  │  │ Controlar │
+        │ templates │  │ sin IT    │  │ versiones │
+        │ sin código│  │           │  │           │
+        └─────┬─────┘  └─────┬─────┘  └─────┬─────┘
+              │               │               │
+        ┌─────▼─────┐  ┌─────▼─────┐  ┌─────▼─────┐
+        │DELIVERABLE│  │DELIVERABLE│  │DELIVERABLE│
+        │ Motor DSL │  │ App móvil │  │ Versionado│
+        │ + editor  │  │ Bluetooth │  │ templates │
+        └───────────┘  └───────────┘  └───────────┘
+```
+
+#### Ejemplo del proyecto — Impact Map desde las necesidades de negocio
+
+Las necesidades de negocio del proyecto (NB-01 a NB-06) se mapean a un Impact Map:
+
+| Nivel | Elemento | Conexión |
+|---|---|---|
+| **Goal** | Estandarizar y abaratar la generación de documentos impresos | NB-02, NB-05 |
+| **Actor 1** | Desarrollador de aplicaciones | Consume la librería MotorDsl.Core |
+| **Impact 1** | Diseñar templates sin hardcodear lógica de impresión | NB-01: desacoplar datos, diseño y dispositivo |
+| **Deliverable 1** | Motor DSL con parser + AST + renderers | Épicas 1-7 del backlog técnico |
+| **Actor 2** | Operador de campo | Usa la app final en dispositivos móviles |
+| **Impact 2** | Imprimir documentos sin depender de IT | NB-04: adaptarse a múltiples dispositivos |
+| **Deliverable 2** | Rendering ESC/POS + Bluetooth + perfiles de dispositivo | Épicas 7, 9 |
+| **Actor 3** | Gerente de IT / Responsable técnico | Gestiona las aplicaciones de la organización |
+| **Impact 3** | Reutilizar componentes entre proyectos | NB-06: habilitar reutilización |
+| **Deliverable 3** | Librería NuGet empaquetada con API pública | Épica 8 (extensibilidad) |
+
+> 📎 Referencia: `docs/01_necesidades_negocio/necesidades-negocio_v1.0.md` — NB-01 a NB-06
+
+#### Cuándo usarlo
+
+- **Al inicio del proyecto** para validar que los entregables técnicos se conectan con objetivos de negocio
+- **En planificación de roadmap** para priorizar features por impacto real, no por complejidad técnica
+- **Cuando el backlog crece** y se necesita decidir qué eliminar — si un deliverable no se conecta con un goal, es candidato a eliminación
+
+---
+
+### 16.12 — Dual-Track Agile
+
+#### Qué es
+
+**Dual-Track Agile** separa el trabajo del equipo en dos tracks paralelos:
+
+- **Discovery Track:** investigar **qué construir** — entrevistas con usuarios, prototipos, spikes, validación de hipótesis, análisis competitivo
+- **Delivery Track:** construir **lo que ya se validó** — sprints normales con historias refinadas, código, testing, deployment
+
+El Discovery Track alimenta al Delivery Track con **ideas validadas** que se transforman en user stories listas para el sprint. No todo lo que se investiga se construye — solo lo que pasa los criterios de validación.
+
+#### Diagrama ASCII
+
+```
+DISCOVERY TRACK                       DELIVERY TRACK
+(qué construir)                       (cómo construirlo)
+
+┌──────────────┐                      ┌──────────────┐
+│ Investigar   │                      │ Sprint N     │
+│ necesidad    │──── ideas ─────►     │ US validadas │
+│ del usuario  │   validadas          │              │
+└──────────────┘                      └──────────────┘
+┌──────────────┐                      ┌──────────────┐
+│ Prototipar   │                      │ Sprint N+1   │
+│ y testear    │──── specs ─────►     │ US refinadas │
+│ con usuarios │   completas          │              │
+└──────────────┘                      └──────────────┘
+┌──────────────┐                      ┌──────────────┐
+│ Analizar     │                      │ Sprint N+2   │
+│ resultados   │──── ajustes ───►     │ US ajustadas │
+│ y pivotar    │   de scope           │              │
+└──────────────┘                      └──────────────┘
+
+     ▲                                       │
+     │           Feedback loop               │
+     └───────────────────────────────────────┘
+```
+
+#### Cuándo usarlo
+
+- **Productos nuevos** con alta incertidumbre de mercado — no se sabe si los usuarios necesitan lo que se planea construir
+- Cuando el **PO necesita validar hipótesis** antes de invertir sprints de desarrollo
+- Equipos con **capacidad de UX research** o Product Discovery dedicada
+- Organizaciones que practican **Lean Startup** (Build-Measure-Learn)
+
+#### Cuándo NO usarlo
+
+- **Proyectos internos** donde los requisitos son claros y validados — como el Motor DSL, donde la necesidad de negocio ya está definida (NB-01 a NB-06)
+- **Equipos pequeños** que no pueden dividirse en dos tracks sin perder capacidad de delivery
+- Proyectos con **deadline fijo** donde el scope ya está comprometido y no hay margen para discovery
+
+---
+
+### 16.13 — Tabla resumen: Cuándo usar cada técnica
+
+La siguiente tabla cruza situaciones típicas de proyecto con las técnicas más recomendadas para cada una:
+
+| Situación del proyecto | Técnicas recomendadas | Por qué |
+|---|---|---|
+| Inicio de proyecto, mucha incertidumbre arquitectónica | Walking Skeleton + Spike + Impact Mapping | Validar arquitectura y conectar con negocio antes de comprometer sprints |
+| Backlog desordenado, scope poco claro | Story Mapping + Vertical Slicing | Visualizar el flujo completo y cortar en slices entregables |
+| Historias vagas, muchas reglas de negocio | Example Mapping + ATDD | Clarificar con ejemplos concretos y tests ejecutables |
+| Equipo nuevo, poca experiencia compartida | Mob Programming + Walking Skeleton | Construir conocimiento compartido mientras se valida la arquitectura |
+| Producto maduro, funcionalidades grandes | Shape Up o Vertical Slicing | Ciclos largos con autonomía o cortes incrementales |
+| Producto nuevo, incertidumbre de mercado | Dual-Track Agile + Impact Mapping | Validar hipótesis antes de construir |
+| Sprint planning recurrente, refinamiento | Example Mapping + Story Mapping | Técnicas específicas para sesiones de refinamiento |
+| Decisiones técnicas con alto riesgo | Spike + Tracer Bullet | Investigar y validar antes de comprometer |
+| Deuda técnica acumulada | Shape Up (cooldown) + Vertical Slicing | Ciclos dedicados a deuda o slices que incluyan refactoring |
+
+**Nota:** Estas técnicas no son mutuamente excluyentes. Un equipo maduro típicamente combina varias según la fase del proyecto y la naturaleza del trabajo. Lo importante es elegir conscientemente en lugar de aplicar Scrum "de libro" sin complementarlo con prácticas de descomposición y planificación.
+
+---
+
 ## Control de Cambios
 
 | Versión | Fecha | Descripción |
 |---|---|---|
 | 1.0 | 2026-04-13 | Versión inicial — documento completo de referencia |
+| 1.1 | 2026-04-13 | Agregada Sección 16 — Técnicas complementarias de descomposición y planificación ágil |
+| 1.2 | 2026-04-13 | Ampliada Sección 6 — Definiciones, técnicas de redacción y ejemplos en contextos web |
+| 1.3 | 2026-04-13 | Agregado índice completo de secciones y subsecciones en la cabecera |
 
 ---
 
