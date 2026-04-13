@@ -2254,6 +2254,46 @@ La estrategia de testing del proyecto define una pirámide de 70% tests unitario
 
 > 📎 Referencia: `docs/08_calidad_y_pruebas/estrategia-testing-motor_v1.0.md`
 
+#### Ejemplo en contexto web — E-commerce: Aplicar cupón de descuento
+
+```
+Feature: Aplicar cupón de descuento en el checkout
+
+  Scenario: Aplicar cupón porcentual válido
+    Given que tengo un carrito con 2 productos por un total de $10.000
+    And existe un cupón "VERANO20" vigente con 20% de descuento
+    When ingreso el código "VERANO20" en el campo de cupón
+    And hago clic en "Aplicar"
+    Then el total del carrito se actualiza a $8.000
+    And se muestra el mensaje "Cupón VERANO20 aplicado: -$2.000"
+    And el botón "Aplicar" cambia a "Quitar cupón"
+
+  Scenario: Rechazar cupón expirado
+    Given que tengo un carrito con productos
+    And el cupón "INVIERNO10" expiró el 2026-03-31
+    When ingreso el código "INVIERNO10" y hago clic en "Aplicar"
+    Then el total del carrito NO cambia
+    And se muestra el error "Este cupón expiró el 31/03/2026"
+
+  Scenario: Rechazar cupón con monto mínimo no alcanzado
+    Given que tengo un carrito con un total de $3.000
+    And el cupón "DESCUENTO50" requiere un mínimo de $5.000
+    When ingreso el código "DESCUENTO50" y hago clic en "Aplicar"
+    Then el total del carrito NO cambia
+    And se muestra el error "Este cupón requiere una compra mínima de $5.000"
+
+  Scenario: Reemplazar cupón existente
+    Given que tengo el cupón "VERANO20" aplicado en mi carrito de $10.000
+    When ingreso un nuevo código "ENVIOGRATIS" y hago clic en "Aplicar"
+    Then se muestra un diálogo "Ya tenés un cupón aplicado. ¿Querés reemplazarlo?"
+    When confirmo el reemplazo
+    Then el cupón "VERANO20" se remueve
+    And el cupón "ENVIOGRATIS" se aplica
+    And el total se recalcula con el nuevo descuento
+```
+
+**Valor del ATDD en este caso:** Estos tests se escribieron en el refinamiento con el PO, el dev y el QA juntos. Cuando el desarrollador empieza a codear, ya tiene una especificación ejecutable. Cuando el QA testea, usa exactamente estos escenarios. No hay ambigüedad.
+
 ---
 
 ### 16.9 — Mob Programming
@@ -2304,6 +2344,37 @@ Sin mob, este diseño hubiera requerido:
 
 > 📎 Referencia: `docs/05_arquitectura_tecnica/contratos-del-motor_v1.0.md` — contratos e interfaces del motor
 
+#### Ejemplo en contexto web — Startup SaaS: Definir API REST pública
+
+Una startup SaaS está construyendo una plataforma de gestión de inventario. La API REST será consumida por 3 clientes: la app web (React), la app mobile (React Native) y partners que integran vía API. El equipo decide hacer mob programming para definir el contrato de la API:
+
+```
+Sesión de Mob Programming: Definir API REST pública v1
+────────────────────────────────────────────────────────
+Participantes: 2 devs backend + 1 dev frontend + 1 dev mobile + 1 QA
+Duración: 3 horas (rotación cada 15 min = 12 rotaciones)
+Artefactos: Especificación OpenAPI 3.0 + colección Postman + tests de contrato
+
+Resultado:
+  - 12 endpoints definidos con request/response schemas
+  - Convenciones acordadas: paginación cursor-based, errores RFC 7807,
+    versionado por header (Accept: application/vnd.inventory.v1+json)
+  - El dev frontend validó que los payloads tienen la forma que necesita
+  - El dev mobile identificó 2 campos que necesita y que el backend
+    no había considerado
+  - El QA generó la colección Postman con ejemplos
+  - 0 sorpresas en integración → se evitaron 2-3 días de ida y vuelta
+
+Sin mob, este diseño hubiera requerido:
+  - Backend diseña API solo (4h)
+  - Documenta en Swagger (2h)
+  - Frontend revisa y pide cambios (1 día de espera + 2h de cambios)
+  - Mobile revisa y pide más cambios (otro día de espera + 1h)
+  Total: ~12h distribuidas en 3-4 días vs. 3h concentradas
+```
+
+**Por qué funciona:** La API es un contrato compartido. Si se diseña en aislamiento, los consumidores descubren problemas tarde. El mob asegura que todos los consumidores validan el contrato en tiempo real.
+
 ---
 
 ### 16.10 — Shape Up (Basecamp)
@@ -2348,6 +2419,38 @@ Sin mob, este diseño hubiera requerido:
 - Equipos nuevos que necesitan la estructura de Scrum para aprender a ser ágiles
 - Proyectos con requisitos regulatorios estrictos que necesitan trazabilidad detallada
 - Equipos grandes (> 8 personas) donde la coordinación requiere ceremonias explícitas
+
+#### Ejemplo en contexto web — Pitch de Shape Up para notificaciones push (SaaS)
+
+```
+┌─────────────────────────────────────────────────────────────┐
+PITCH: Notificaciones push configurables
+├─────────────────────────────────────────────────────────────┤
+│ PROBLEMA:                                                   │
+│ Los usuarios se quejan de recibir demasiados emails de       │
+│ la plataforma. El 30% desactiva las notificaciones por       │
+│ email, perdiendo alertas importantes (facturas, vencimientos)│
+├─────────────────────────────────────────────────────────────┤
+│ APPETITE: 6 semanas (1 ciclo)                                │
+├─────────────────────────────────────────────────────────────┤
+│ SOLUCIÓN:                                                    │
+│ - Sistema de notificaciones push (browser + mobile)          │
+│ - Panel de preferencias donde el usuario elige qué recibir   │
+│ - 3 canales: push, email, in-app (el usuario elige)          │
+│ - Templates de notificación editables por el admin            │
+├─────────────────────────────────────────────────────────────┤
+│ RABBIT HOLES (evitar):                                       │
+│ - NO construir un editor visual de templates (demasiado)     │
+│ - NO soportar SMS en este ciclo (integración costosa)        │
+│ - NO hacer analíticas de apertura (complejidad de tracking)   │
+├─────────────────────────────────────────────────────────────┤
+│ NO-GOS (explícitamente fuera de scope):                       │
+│ - Notificaciones transaccionales (facturas) → otro ciclo     │
+│ - Integración con Slack/Teams → otro ciclo                    │
+└─────────────────────────────────────────────────────────────┘
+```
+
+**Diferencia clave con Scrum:** En Scrum, este trabajo se descompondría en 15-20 user stories estimadas en Story Points, distribuidas en 3 sprints de 2 semanas, con daily standups y burndown charts. En Shape Up, el pitch define el **qué** y los **límites** (rabbit holes, no-gos), y el equipo de 2-3 personas decide el **cómo** con autonomía total durante 6 semanas.
 
 ---
 
@@ -2415,6 +2518,41 @@ Las necesidades de negocio del proyecto (NB-01 a NB-06) se mapean a un Impact Ma
 - **En planificación de roadmap** para priorizar features por impacto real, no por complejidad técnica
 - **Cuando el backlog crece** y se necesita decidir qué eliminar — si un deliverable no se conecta con un goal, es candidato a eliminación
 
+#### Ejemplo en contexto web — Impact Map de E-commerce
+
+```
+                    ┌─────────────────────┐
+                    │       GOAL          │
+                    │ Aumentar conversión │
+                    │ del checkout en 25% │
+                    └─────────┬───────────┘
+                              │
+              ┌─────────────┼─────────────┐
+              ▼               ▼               ▼
+        ┌───────────┐  ┌───────────┐  ┌───────────┐
+        │  ACTOR    │  │  ACTOR    │  │  ACTOR    │
+        │ Comprador │  │ Vendedor/ │  │ Equipo    │
+        │ frecuente │  │ Admin     │  │ marketing │
+        └─────┬─────┘  └─────┬─────┘  └─────┬─────┘
+              │               │               │
+        ┌─────▼─────┐  ┌─────▼─────┐  ┌─────▼─────┐
+        │  IMPACT   │  │  IMPACT   │  │  IMPACT   │
+        │ Completar │  │ Crear    │  │ Lanzar   │
+        │ compra en │  │ ofertas  │  │ campañas │
+        │ < 2 min   │  │ rápido   │  │ retarget │
+        └─────┬─────┘  └─────┬─────┘  └─────┬─────┘
+              │               │               │
+        ┌─────▼─────┐  ┌─────▼─────┐  ┌─────▼─────┐
+        │DELIVERABLE│  │DELIVERABLE│  │DELIVERABLE│
+        │ Checkout 1│  │ Panel de  │  │ Pixel de  │
+        │ clic,     │  │ cupones y │  │ tracking +│
+        │ tarjeta   │  │ descuentos│  │ integración│
+        │ guardada  │  │ masivos   │  │ Meta Ads  │
+        └───────────┘  └───────────┘  └───────────┘
+```
+
+**Cómo se usa en la práctica:** Si el equipo propone "Agregar chat en vivo al sitio", se valida contra el Impact Map: ¿qué actor impacta? ¿qué impacto genera? ¿se conecta con el goal de conversión? Si no se puede trazar la línea, la feature no debería estar en el backlog de este trimestre.
+
 ---
 
 ### 16.12 — Dual-Track Agile
@@ -2468,6 +2606,35 @@ DISCOVERY TRACK                       DELIVERY TRACK
 - **Equipos pequeños** que no pueden dividirse en dos tracks sin perder capacidad de delivery
 - Proyectos con **deadline fijo** donde el scope ya está comprometido y no hay margen para discovery
 
+#### Ejemplo en contexto web — App de delivery: Discovery + Delivery en paralelo
+
+Una app de delivery tiene dos equipos trabajando en paralelo:
+
+```
+DISCOVERY TRACK                          DELIVERY TRACK
+(Product Designer + 1 Dev)               (3 Devs + 1 QA)
+
+┌────────────────────────┐              ┌────────────────────────┐
+│ Semana 1-2:            │              │ Sprint 5:              │
+│ Entrevistar 10         │              │ Tracking en tiempo     │
+│ repartidores:          │              │ real (ya validado en   │
+│ "¿Necesitás chat con   │              │ discovery anterior)    │
+│  el cliente?"          │              │                        │
+└────────────┬───────────┘              └────────────────────────┘
+             │
+             ▼
+┌────────────────────────┐
+│ Semana 3-4:            │              ┌────────────────────────┐
+│ Resultado: 8/10 dicen  │              │ Sprint 6:              │
+│ que SÍ, pero solo para │──── specs ──►│ Chat con mensajes     │
+│ mensajes predefinidos  │  validadas   │ predefinidos           │
+│ (no chat libre).       │              │ (scope reducido por    │
+│ Prototipo testeado ✅   │              │  discovery)            │
+└────────────────────────┘              └────────────────────────┘
+```
+
+**Qué hubiera pasado sin Dual-Track:** El equipo hubiera construido un chat libre completo (Sprint 5 + 6), consumiendo 4 semanas. Con discovery, descubrieron que los repartidores solo necesitan **mensajes predefinidos** ("Estoy en la puerta", "No encuentro la dirección"), reduciendo el scope a 1 sprint y ahorrando 2 semanas de desarrollo innecesario.
+
 ---
 
 ### 16.13 — Tabla resumen: Cuándo usar cada técnica
@@ -2498,6 +2665,7 @@ La siguiente tabla cruza situaciones típicas de proyecto con las técnicas más
 | 1.1 | 2026-04-13 | Agregada Sección 16 — Técnicas complementarias de descomposición y planificación ágil |
 | 1.2 | 2026-04-13 | Ampliada Sección 6 — Definiciones, técnicas de redacción y ejemplos en contextos web |
 | 1.3 | 2026-04-13 | Agregado índice completo de secciones y subsecciones en la cabecera |
+| 1.4 | 2026-04-13 | Agregados ejemplos en contextos web y otros dominios a la Sección 16 |
 
 ---
 
