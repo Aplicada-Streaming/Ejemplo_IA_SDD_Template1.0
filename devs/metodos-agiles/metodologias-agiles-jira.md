@@ -1756,6 +1756,40 @@ El roadmap del proyecto aplica vertical slicing desde la Fase 1 (MVP): entrega u
 4. **Si un slice no tiene output visible**, re-cortar hasta que lo tenga
 5. **Priorizar slices por riesgo** — los que validan decisiones arquitectónicas van primero
 
+#### Ejemplo en contexto web — E-commerce (Checkout)
+
+**HORIZONTAL (anti-patrón):**
+
+| Sprint | Qué se entrega | Valor para el usuario |
+|---|---|---|
+| Sprint 1 | Toda la UI del checkout (formulario de dirección, resumen, pago) | ❌ Ninguno — no hay backend |
+| Sprint 2 | Toda la API REST (endpoints de carrito, pagos, envío) | ❌ Ninguno — no hay integración con pasarela |
+| Sprint 3 | Toda la integración (Stripe, cálculo de envío, emails) | ✅ Recién ahora funciona |
+
+**VERTICAL (recomendado):**
+
+| Sprint | Qué se entrega | Valor para el usuario |
+|---|---|---|
+| Sprint 1 | Comprar 1 producto con tarjeta de crédito (UI mínima → API → Stripe → confirmación) | ✅ Se puede comprar |
+| Sprint 2 | Agregar cupón de descuento al checkout (campo UI → validación API → descuento aplicado) | ✅ Se pueden usar cupones |
+| Sprint 3 | Pagar con MercadoPago como alternativa (botón UI → integración MP → confirmación) | ✅ Nuevo medio de pago |
+
+```
+Vertical Slicing en E-commerce:
+┌─────────┬────────────┬─────────────┬───────────────┐
+│ Slice 1 │  Slice 2   │  Slice 3    │               │
+│ Pagar   │  Cupón de  │  Pagar con  │               │
+│ con     │  descuento │  Mercado    │    ...más     │
+│ tarjeta │            │  Pago       │    slices     │
+│         │            │             │               │
+│ UI+API  │  UI+API    │  UI+API     │               │
+│ +Stripe │  +lógica   │  +integrac. │               │
+│ +email  │  +BD       │  +webhook   │               │
+└─────────┴────────────┴─────────────┴───────────────┘
+  Sprint 1    Sprint 2     Sprint 3
+  ✅ valor    ✅ valor     ✅ valor
+```
+
 ---
 
 ### 16.3 — Walking Skeleton
@@ -1804,6 +1838,31 @@ Walking Skeleton (Sprint 01):
 
 El walking skeleton es un paso **técnico** — un medio para llegar al MVP. El MVP es un paso de **negocio** — el primer producto que valida hipótesis de mercado.
 
+#### Ejemplo en contexto web — Plataforma de cursos online (SaaS)
+
+El walking skeleton de una plataforma de cursos online sería:
+
+| Componente | Qué se implementa en el skeleton | Qué NO se implementa |
+|---|---|---|
+| Frontend | Página de login + 1 pantalla de catálogo con 1 curso hardcodeado | Diseño final, responsive, catálogo dinámico |
+| API | Endpoint `/courses` que devuelve 1 curso fijo, endpoint `/enroll` | CRUD completo, búsqueda, filtros, paginación |
+| Base de datos | Tabla `users` + tabla `enrollments` mínimas | Tabla de pagos, progreso, certificados |
+| Auth | Login con email/password básico | OAuth, 2FA, recuperar contraseña |
+| Video | Embed de 1 video de YouTube | Player propio, DRM, streaming adaptativo |
+
+```
+Walking Skeleton — Plataforma de cursos:
+┌──────────┐    ┌─────────┐    ┌──────────┐    ┌──────────┐
+│ Usuario  │───►│  Login  │───►│ Catálogo │───►│Inscribir │──► Confirmación
+│ (email)  │    │ (básico)│    │ (1 curso)│    │ (mínimo) │
+└──────────┘    └─────────┘    └──────────┘    └──────────┘
+     ▲                                              │
+     │         Flujo completo conectado              │
+     └────────────── se puede probar ◄───────────────┘
+```
+
+**Resultado:** Al final del sprint, un usuario puede registrarse, ver un curso y hacer clic en "Inscribirse". No es usable para producción, pero demuestra que las capas se conectan (React → Express → PostgreSQL → response).
+
 ---
 
 ### 16.4 — Thin Slice / Tracer Bullet
@@ -1849,6 +1908,34 @@ Tracer Bullet del Motor DSL:
 Si el tracer bullet falla (por ejemplo, si el parser no puede manejar la estructura DSL propuesta), se descubre en el Sprint 01 — no en el Sprint 04 cuando ya se invirtieron semanas de trabajo.
 
 > 📎 Referencia: `docs/05_arquitectura_tecnica/arquitectura-solucion_v1.0.md` — Pipeline del motor
+
+#### Ejemplo en contexto web — Fintech (Billetera virtual)
+
+Una startup fintech quiere construir una billetera virtual. Antes de invertir 3 meses en la app completa, lanzan un tracer bullet para responder:
+
+> *"¿Podemos mover dinero de cuenta A a cuenta B usando la API del banco X con nuestro stack Node.js + PostgreSQL?"*
+
+```
+Tracer Bullet — Billetera Virtual:
+
+  ┌─────────────────────────────────────────────────────────────┐
+  │                    PREGUNTA A VALIDAR:                      │
+  │  "¿La API del banco X permite transferencias P2P desde      │
+  │   nuestra app con el stack elegido (Node + PostgreSQL)?"    │
+  └─────────────────────────────────────────────────────────────┘
+                              │
+  ┌──────────┐  ┌──────────┐  ▼  ┌──────────┐  ┌──────────┐
+  │  UI      │─►│  API     │───►│  Banco   │─►│ Notific. │
+  │  Botón   │  │  POST    │    │  API X   │  │  Email   │
+  │ "Enviar" │  │ /transfer│    │ (sandbox)│  │ (básico) │
+  └──────────┘  └──────────┘    └──────────┘  └──────────┘
+       │              │              │              │
+       ▼              ▼              ▼              ▼
+   Formulario    Validación     Respuesta      Confirmación
+   mínimo       básica         del banco      por email
+```
+
+**Elementos validados:** latencia de la API bancaria, formato de respuestas, manejo de errores del banco, flujo de idempotencia para evitar doble transferencia. Si el tracer bullet falla, se pivotea de banco antes de escribir la app.
 
 ---
 
@@ -1906,6 +1993,33 @@ Las épicas del roadmap se mapean directamente a un Story Map:
 - **Para comunicar el plan** al PO y stakeholders de forma visual — un Story Map es más intuitivo que una lista plana de user stories
 - **Cuando el backlog crece** y se pierde la noción de cómo las historias se conectan entre sí
 
+#### Ejemplo en contexto web — Story Map de E-commerce
+
+```
+BACKBONE (actividades del comprador):
+──────────────────────────────────────────────────────────────────────
+ Buscar       │ Ver         │ Agregar    │ Checkout    │  Recibir
+ productos    │ detalle     │ al carrito │ y pagar     │  pedido
+──────────────────────────────────────────────────────────────────────
+              │             │            │             │
+RELEASE 1     │             │            │             │
+(MVP):        │             │            │             │
+ Listado      │ Nombre,     │ Agregar 1  │ Tarjeta     │ Email de
+ por categoría│ precio,     │ producto   │ de crédito  │ confirmación
+              │ 1 foto      │            │ (Stripe)    │
+─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─
+RELEASE 2:    │             │            │             │
+ Búsqueda     │ Reviews,    │ Cantidad,  │ Cupones,    │ Tracking
+ por texto,   │ galería,    │ favoritos, │ MercadoPago,│ en tiempo
+ filtros      │ relacionados│ comparar   │ 3 cuotas    │ real
+─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─
+RELEASE 3:    │             │            │             │
+ IA recomend.,│ Video,      │ Wishlist   │ Wallet,     │ Devolución,
+ autocomplet. │ AR preview  │ compartida │ crypto      │ reembolso
+```
+
+**Cómo se lee:** Todo lo que está arriba de la primera línea punteada es el MVP (Release 1). El equipo puede ver de un vistazo que necesita al menos 1 historia por cada columna del backbone para tener un producto usable. Si una columna del Release 1 está vacía, falta un slice.
+
 ---
 
 ### 16.6 — Example Mapping
@@ -1955,6 +2069,37 @@ La sesión dura **25-30 minutos** por historia. Si hay más de 3 tarjetas rojas 
 - Cuando los **criterios de aceptación son vagos** o están expresados como "funcionar correctamente"
 - Cuando hay **muchas reglas de negocio** que interactúan y se necesita desambiguar
 - Cuando el **PO y el equipo** no están alineados sobre el scope exacto de una historia
+
+#### Ejemplo en contexto web — E-commerce: "Aplicar cupón de descuento"
+
+```
+🟡 US: Como comprador, quiero aplicar un cupón de descuento en el checkout,
+       para pagar menos por mi pedido
+
+🔵 Regla 1: El cupón debe ser válido (existe, no expirado, no agotado)
+  🟢 Ejemplo 1.1: Cupón "VERANO20" vigente → se aplica 20% de descuento al total
+  🟢 Ejemplo 1.2: Cupón "INVIERNO10" expirado hace 2 días → error "Cupón expirado"
+  🟢 Ejemplo 1.3: Cupón "UNICO50" ya usado por este usuario → error "Cupón ya utilizado"
+
+🔵 Regla 2: El cupón tiene monto mínimo de compra
+  🟢 Ejemplo 2.1: Cupón requiere mínimo $5000, carrito tiene $6000 → se aplica
+  🟢 Ejemplo 2.2: Cupón requiere mínimo $5000, carrito tiene $3000 → error "Monto mínimo no alcanzado ($5000)"
+
+🔵 Regla 3: Solo un cupón por pedido
+  🟢 Ejemplo 3.1: Carrito sin cupón, aplico "VERANO20" → se aplica
+  🟢 Ejemplo 3.2: Carrito ya tiene "VERANO20", aplico "ENVIOGRATIS" → reemplaza el anterior con confirmación
+
+🔵 Regla 4: Tipos de descuento (porcentaje vs. monto fijo)
+  🟢 Ejemplo 4.1: Cupón "20OFF" (20%) en carrito de $10.000 → descuento de $2.000
+  🟢 Ejemplo 4.2: Cupón "1000MENOS" ($1.000 fijo) en carrito de $10.000 → descuento de $1.000
+  🟢 Ejemplo 4.3: Cupón "90OFF" (90%) en carrito de $500 → descuento de $450 (no puede ser mayor al total)
+
+🔴 Pregunta: ¿Los cupones aplican a productos individuales o al total del carrito?
+🔴 Pregunta: ¿Se pueden combinar cupones con ofertas de temporada?
+🔴 Pregunta: ¿El descuento se calcula antes o después del costo de envío?
+```
+
+**Resultado:** Esta sesión de 25 minutos reveló 3 preguntas que el PO no había considerado. Sin Example Mapping, estas ambigüedades se hubieran descubierto durante el desarrollo, generando retrabajo.
 
 ---
 
@@ -2010,6 +2155,18 @@ Un spike relevante para el proyecto sería evaluar la viabilidad de renderizado 
 #### Regla clave
 
 Un spike **NO produce código productivo** — produce conocimiento. El código productivo se implementa en una user story separada que se crea después del spike, ya con la incertidumbre resuelta. Si un spike produce código que se sube a producción, no era un spike — era una historia mal clasificada.
+
+#### Ejemplos de spikes en contexto web
+
+| ID | Dominio | Tipo | Pregunta a responder | Timebox | Output esperado |
+|---|---|---|---|---|---|
+| SP-W01 | E-commerce | Funcional | ¿Stripe soporta pagos recurrentes con tarjetas argentinas sin 3D Secure? | 2 días | Informe de compatibilidad + PoC descartable |
+| SP-W02 | SaaS | Performance | ¿Elasticsearch responde en < 200ms para búsquedas full-text sobre 500K documentos? | 1 día | Benchmark con métricas y gráficos |
+| SP-W03 | App mobile | Arquitectónico | ¿Se puede implementar auth con OAuth2 + PKCE en React Native sin librería de terceros? | 2 días | ADR con decisión Go/No-Go + flujo documentado |
+| SP-W04 | Fintech | De seguridad | ¿El approach de tokenización cumple con PCI DSS nivel 2 sin certificación adicional? | 3 días | Informe de compliance + checklist de requisitos |
+| SP-W05 | Red social | Performance | ¿WebSockets escala a 10K conexiones concurrentes con nuestro tier de AWS? | 2 días | Resultados de load test + estimación de costos |
+
+**Patrón común:** Cada spike tiene una **pregunta concreta** y un **output medible**. Si el spike no tiene pregunta clara, no es un spike — es una tarea de investigación sin foco.
 
 ---
 
