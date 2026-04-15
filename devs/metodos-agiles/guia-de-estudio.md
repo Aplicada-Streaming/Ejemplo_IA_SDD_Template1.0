@@ -184,6 +184,14 @@ Una US entra al sprint cuando:
 - [ ] Los wireframes o mockups necesarios están disponibles
 - [ ] El PO la aprobó como prioridad del sprint
 
+> **Ejemplo ilustrativo de criterios de aceptación — US-03 (Reservar un turno):**
+>
+> | # | Escenario | Resultado esperado |
+> |---|---|---|
+> | 1 | Paciente selecciona un turno disponible | Se confirma la reserva y se muestra comprobante con fecha, hora y profesional |
+> | 2 | Otro paciente ya tomó ese turno (concurrencia) | El sistema muestra error y sugiere el próximo horario disponible |
+> | 3 | Paciente ya tiene un turno en la misma fecha y especialidad | El sistema no permite la doble reserva y muestra aviso |
+
 #### DoD
 
 Una US se considera terminada cuando:
@@ -192,6 +200,57 @@ Una US se considera terminada cuando:
 - [ ] Pasa todos los tests en CI
 - [ ] Fue probada manualmente contra sus criterios de aceptación
 - [ ] El PO la aceptó en la Sprint Review
+
+> **Ejemplo ilustrativo de validación manual — US-03 (Reservar un turno):**
+>
+> - [ ] Se reservó un turno disponible → aparece en "Mis turnos" del paciente y en la agenda del médico
+> - [ ] Se intentó reservar un turno ya ocupado → se mostró error sin generar reserva duplicada
+> - [ ] Se verificó que el turno reservado descuenta disponibilidad en la búsqueda
+
+#### Criterios de aceptación por User Story
+
+> *Los criterios de aceptación se elaboran durante el refinamiento, antes de que la US entre al sprint. Acá se muestran los de las US Must Have como referencia.*
+
+##### US-01 — Registrarse con email y contraseña
+
+| # | Escenario | Resultado esperado |
+|---|---|---|
+| 1 | Paciente se registra con email válido y contraseña segura | Se crea la cuenta y se redirige al inicio con sesión activa |
+| 2 | Paciente intenta registrarse con un email ya registrado | El sistema muestra error indicando que la cuenta ya existe |
+| 3 | Paciente envía formulario con contraseña menor a 8 caracteres | El sistema rechaza y muestra regla de contraseña |
+| 4 | Paciente deja el campo email vacío | El sistema muestra validación de campo obligatorio |
+
+##### US-02 — Buscar turnos disponibles por especialidad y fecha
+
+| # | Escenario | Resultado esperado |
+|---|---|---|
+| 1 | Paciente busca por especialidad y fecha con turnos disponibles | Se muestra lista de horarios disponibles con nombre del profesional |
+| 2 | Paciente busca por especialidad y fecha sin turnos disponibles | Se muestra mensaje "No hay turnos disponibles" y se sugiere otra fecha |
+| 3 | Paciente busca sin seleccionar especialidad | El sistema exige seleccionar al menos la especialidad |
+
+##### US-03 — Reservar un turno
+
+| # | Escenario | Resultado esperado |
+|---|---|---|
+| 1 | Paciente selecciona un turno disponible | Se confirma la reserva y se muestra comprobante con fecha, hora y profesional |
+| 2 | Otro paciente ya tomó ese turno (concurrencia) | El sistema muestra error y sugiere el próximo horario disponible |
+| 3 | Paciente ya tiene un turno en la misma fecha y especialidad | El sistema no permite la doble reserva y muestra aviso |
+
+##### US-04 — Cancelar un turno
+
+| # | Escenario | Resultado esperado |
+|---|---|---|
+| 1 | Paciente cancela un turno con más de 24hs de anticipación | Se libera el horario y se confirma la cancelación |
+| 2 | Paciente cancela un turno con menos de 2hs de anticipación | El sistema advierte pero permite cancelar |
+| 3 | Paciente intenta cancelar un turno que ya pasó | El sistema no permite la operación e informa que el turno ya fue |
+
+##### US-05 — Ver agenda del día (médico)
+
+| # | Escenario | Resultado esperado |
+|---|---|---|
+| 1 | Médico consulta su agenda con turnos programados | Se muestra lista ordenada por hora con nombre del paciente y especialidad |
+| 2 | Médico consulta su agenda un día sin turnos | Se muestra mensaje "No tenés turnos programados para hoy" |
+| 3 | Un paciente cancela un turno mientras el médico ve la agenda | La agenda refleja la cancelación al refrescar |
 
 ---
 
@@ -233,6 +292,14 @@ Una US se considera terminada cuando:
 - [ ] No tiene dependencias bloqueantes sin resolver
 - [ ] El PO la aprobó como prioridad del sprint
 
+> **Ejemplo ilustrativo de criterios de aceptación — US-02 (Registrar entrada de stock):**
+>
+> | # | Escenario | Resultado esperado |
+> |---|---|---|
+> | 1 | Encargado registra entrada con cantidad válida para un producto existente | El stock se actualiza sumando las unidades ingresadas |
+> | 2 | Encargado intenta registrar entrada para un código de producto inexistente | El sistema muestra error y sugiere dar de alta el producto primero |
+> | 3 | Encargado ingresa cantidad negativa o cero | El sistema rechaza la operación y muestra validación |
+
 #### DoD
 
 - [ ] Código revisado en PR por al menos 1 persona
@@ -240,6 +307,56 @@ Una US se considera terminada cuando:
 - [ ] Integración probada contra la base de datos real (no mock)
 - [ ] Validado manualmente contra criterios de aceptación
 - [ ] PO aceptó la funcionalidad en Sprint Review
+
+> **Ejemplo ilustrativo de validación manual — US-05 (Alerta de stock mínimo):**
+>
+> - [ ] Se redujo el stock hasta el umbral mínimo configurado → se disparó la alerta
+> - [ ] Se verificó que con stock por encima del mínimo → no se genera alerta
+> - [ ] Se probó un producto sin stock mínimo configurado → no genera alerta ni error
+
+#### Criterios de aceptación por User Story
+
+> *Los criterios de aceptación se elaboran durante el refinamiento, antes de que la US entre al sprint. Acá se muestran los de las US Must Have como referencia.*
+
+##### US-01 — Agregar producto al inventario
+
+| # | Escenario | Resultado esperado |
+|---|---|---|
+| 1 | Encargado carga producto con nombre, código y precio válidos | El producto queda registrado y visible en el catálogo |
+| 2 | Encargado intenta cargar un producto con un código que ya existe | El sistema rechaza e informa que el código está duplicado |
+| 3 | Encargado deja el campo precio vacío o en cero | El sistema muestra validación y no permite guardar |
+
+##### US-02 — Registrar entrada de stock
+
+| # | Escenario | Resultado esperado |
+|---|---|---|
+| 1 | Encargado registra entrada con cantidad válida para producto existente | El stock se actualiza sumando las unidades ingresadas |
+| 2 | Encargado intenta registrar entrada para código de producto inexistente | El sistema muestra error y sugiere dar de alta el producto primero |
+| 3 | Encargado ingresa cantidad negativa o cero | El sistema rechaza la operación y muestra validación |
+
+##### US-03 — Registrar salida de stock
+
+| # | Escenario | Resultado esperado |
+|---|---|---|
+| 1 | Vendedor registra salida con cantidad menor o igual al stock disponible | El stock se descuenta y se registra el movimiento |
+| 2 | Vendedor intenta registrar salida mayor al stock disponible | El sistema rechaza e informa el stock actual |
+| 3 | Vendedor registra salida que deja el stock en el umbral mínimo | Se descuenta y se dispara la alerta de stock mínimo |
+
+##### US-04 — Ver stock actual de todos los productos
+
+| # | Escenario | Resultado esperado |
+|---|---|---|
+| 1 | Dueño consulta el inventario con productos cargados | Se muestra tabla con nombre, código, stock actual y precio |
+| 2 | El inventario está vacío (sin productos) | Se muestra mensaje indicando que no hay productos registrados |
+| 3 | Dueño filtra por nombre o código | La lista se reduce mostrando solo los productos que coinciden |
+
+##### US-05 — Alerta de stock mínimo
+
+| # | Escenario | Resultado esperado |
+|---|---|---|
+| 1 | Stock de un producto llega al umbral mínimo configurado | Se genera alerta visible en el panel del dueño |
+| 2 | Stock está por encima del mínimo | No se genera alerta |
+| 3 | Producto no tiene stock mínimo configurado | No genera alerta ni error |
 
 ---
 
@@ -284,6 +401,14 @@ Una US se considera terminada cuando:
 - [ ] Diseño de pantalla disponible para las US con UI
 - [ ] No hay ambigüedad en el alcance: el PO aprobó los límites de la historia
 
+> **Ejemplo ilustrativo de criterios de aceptación — US-06 (Gestionar pago de inscripciones):**
+>
+> | # | Escenario | Resultado esperado |
+> |---|---|---|
+> | 1 | Alumno completa el pago exitosamente | Se habilita el acceso al curso y se envía comprobante por email |
+> | 2 | El pago es rechazado por la pasarela | El alumno ve un mensaje de error claro y no se le otorga acceso |
+> | 3 | Alumno intenta inscribirse a un curso que ya compró | El sistema informa que ya tiene acceso y no genera cobro duplicado |
+
 #### DoD
 
 - [ ] PR aprobado por al menos 2 reviewers
@@ -292,6 +417,64 @@ Una US se considera terminada cuando:
 - [ ] Probado en los 3 browsers objetivo (Chrome, Firefox, Safari)
 - [ ] PO aceptó en Sprint Review
 - [ ] Documentación de API actualizada si aplica
+
+> **Ejemplo ilustrativo de validación manual — US-02 (Crear un curso):**
+>
+> - [ ] Se creó un curso con todos los campos válidos → queda en estado borrador, visible solo para el instructor
+> - [ ] Se intentó crear un curso sin título o sin precio → el sistema mostró validaciones y no permitió guardar
+> - [ ] Se verificó que el curso creado no aparece en el catálogo público hasta ser publicado explícitamente
+
+#### Criterios de aceptación por User Story
+
+> *Los criterios de aceptación se elaboran durante el refinamiento, antes de que la US entre al sprint. Acá se muestran los de las US Must Have como referencia.*
+
+##### US-01 — Registrarse como instructor
+
+| # | Escenario | Resultado esperado |
+|---|---|---|
+| 1 | Instructor se registra con datos válidos | Se crea perfil y accede a su panel de gestión |
+| 2 | Instructor intenta registrarse con email ya existente | El sistema informa que la cuenta ya existe |
+| 3 | Instructor deja campos obligatorios vacíos (nombre, email) | El sistema muestra validaciones y no permite el registro |
+
+##### US-02 — Crear un curso con título, descripción y precio
+
+| # | Escenario | Resultado esperado |
+|---|---|---|
+| 1 | Instructor crea curso con todos los campos válidos | El curso queda en estado borrador, visible solo para el instructor |
+| 2 | Instructor intenta crear curso sin título o sin precio | El sistema muestra validaciones y no permite guardar |
+| 3 | Instructor crea el curso | El curso no aparece en el catálogo público hasta ser publicado explícitamente |
+
+##### US-03 — Subir videos y materiales por sección
+
+| # | Escenario | Resultado esperado |
+|---|---|---|
+| 1 | Instructor sube un video en formato válido (mp4, webm) | El video se almacena y queda asociado a la sección correspondiente |
+| 2 | Instructor intenta subir un archivo que excede el tamaño máximo | El sistema rechaza e informa el límite permitido |
+| 3 | Instructor sube material a un curso que no le pertenece | El sistema deniega la operación |
+
+##### US-04 — Registrarse como alumno e inscribirse a un curso
+
+| # | Escenario | Resultado esperado |
+|---|---|---|
+| 1 | Alumno se registra con datos válidos y se inscribe a un curso gratuito | Se crea cuenta y se habilita acceso al curso inmediatamente |
+| 2 | Alumno intenta inscribirse a un curso pago sin completar el pago | No se otorga acceso; se redirige al flujo de pago |
+| 3 | Alumno intenta registrarse con email ya existente | El sistema informa que la cuenta ya existe |
+
+##### US-05 — Ver contenido del curso comprado
+
+| # | Escenario | Resultado esperado |
+|---|---|---|
+| 1 | Alumno accede a un curso en el que está inscripto | Se muestra el contenido organizado por secciones y lecciones |
+| 2 | Alumno intenta acceder a un curso en el que no está inscripto | El sistema deniega el acceso y muestra opción de inscripción |
+| 3 | Instructor agrega nueva lección al curso | El alumno ve el contenido actualizado en su próxima visita |
+
+##### US-06 — Gestionar pago de inscripciones
+
+| # | Escenario | Resultado esperado |
+|---|---|---|
+| 1 | Alumno completa el pago exitosamente | Se habilita acceso al curso y se envía comprobante por email |
+| 2 | El pago es rechazado por la pasarela | El alumno ve mensaje de error claro y no se otorga acceso |
+| 3 | Alumno intenta inscribirse a un curso que ya compró | El sistema informa que ya tiene acceso y no genera cobro duplicado |
 
 ---
 
@@ -404,6 +587,7 @@ Cuando estos ocho elementos están definidos, el equipo tiene todo lo necesario 
 | Versión | Fecha | Descripción |
 |---|---|---|
 | 1.0 | 2026-04-15 | Versión inicial — guía de estudio basada en ejemplos de arranque de proyectos Scrum |
+| 1.1 | 2026-04-15 | Se agregan ejemplos ilustrativos de criterios de aceptación en DoR/DoD y fichas de criterios de aceptación por US Must Have en los tres ejemplos |
 
 ---
 
