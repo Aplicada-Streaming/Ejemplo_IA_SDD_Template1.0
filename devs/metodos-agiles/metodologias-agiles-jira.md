@@ -131,6 +131,12 @@
   - [16.11 Impact Mapping (Gojko Adzic)](#1611--impact-mapping-gojko-adzic)
   - [16.12 Dual-Track Agile](#1612--dual-track-agile)
   - [16.13 Tabla resumen: Cuándo usar cada técnica](#1613--tabla-resumen-cuándo-usar-cada-técnica)
+- [Sección 17 — Guía práctica para arrancar un proyecto ágil](#sección-17--guía-práctica-para-arrancar-un-proyecto-ágil)
+  - [17.1 Preguntas de diagnóstico inicial](#171--preguntas-de-diagnóstico-inicial)
+  - [17.2 Criterios para elegir la metodología](#172--criterios-para-elegir-la-metodología)
+  - [17.3 Checklist de arranque — Sprint 0](#173--checklist-de-arranque--sprint-0)
+  - [17.4 Orden recomendado para construir los artefactos](#174--orden-recomendado-para-construir-los-artefactos)
+  - [17.5 Errores frecuentes al iniciar un proyecto ágil](#175--errores-frecuentes-al-iniciar-un-proyecto-ágil)
 
 ---
 
@@ -2657,6 +2663,163 @@ La siguiente tabla cruza situaciones típicas de proyecto con las técnicas más
 
 ---
 
+## Sección 17 — Guía práctica para arrancar un proyecto ágil
+
+Esta sección responde una pregunta que los documentos teóricos raramente abordan con claridad: **¿por dónde empiezo?** Conocer Scrum, Kanban o las técnicas de la Sección 16 no es suficiente si no existe un criterio claro para elegir qué aplicar, en qué orden y con qué checklist validar que el equipo está listo para ejecutar.
+
+La guía está organizada en cinco pasos secuenciales. Se puede usar al inicio de cualquier proyecto nuevo o al re-arrancar un proyecto que perdió el rumbo.
+
+---
+
+### 17.1 — Preguntas de diagnóstico inicial
+
+Antes de nombrar roles, crear tableros o escribir user stories, el equipo necesita responder estas preguntas. Las respuestas determinan qué metodología elegir y qué artefactos construir primero.
+
+**Sobre el equipo:**
+
+| Pregunta | Por qué importa |
+|---|---|
+| ¿Cuántas personas tiene el equipo? | Equipos < 10 personas: Scrum o Kanban. Equipos > 10: considerar SAFe o LeSS. |
+| ¿Hay una persona que pueda actuar como Product Owner real (con poder de decisión)? | Sin PO real, Scrum no funciona. Si no existe, Kanban es más honesto. |
+| ¿El equipo tiene experiencia previa en ágil? | Equipos nuevos en ágil necesitan más estructura (Scrum). Equipos maduros pueden usar Kanban o Scrumban. |
+| ¿El equipo es estable o tiene rotación frecuente? | Equipos con rotación alta se benefician de Kanban (menos dependencia de velocity acumulada). |
+
+**Sobre el trabajo:**
+
+| Pregunta | Por qué importa |
+|---|---|
+| ¿Es un proyecto nuevo o mantenimiento de un sistema existente? | Proyectos nuevos → Scrum (sprints, backlog, releases). Mantenimiento/soporte → Kanban (flujo continuo). |
+| ¿La demanda de trabajo es predecible (features planificadas) o variable (bugs, requests ad-hoc)? | Demanda predecible → Scrum. Demanda variable e impredecible → Kanban. |
+| ¿Cuánta incertidumbre técnica existe al inicio? | Alta incertidumbre → Sprint 0 con Spikes y Walking Skeleton antes de comprometer sprints. |
+| ¿El cliente/stakeholder puede participar regularmente en reviews? | Si no puede, las Sprint Reviews no agregan valor. Ajustar cadencia o canal de feedback. |
+
+**Sobre el producto:**
+
+| Pregunta | Por qué importa |
+|---|---|
+| ¿Existe una visión clara del producto? | Sin visión, no se puede priorizar el backlog. Definirla es el paso cero. |
+| ¿Se conoce el alcance inicial aunque sea a grandes rasgos? | Permite construir épicas e identificar dependencias antes del primer sprint. |
+| ¿Hay una fecha de entrega comprometida externamente? | Fecha fija + scope fijo = problema. En ágil se negocia scope, no fecha. |
+
+---
+
+### 17.2 — Criterios para elegir la metodología
+
+Con las respuestas del diagnóstico, usar esta tabla para elegir la metodología base:
+
+| Condición del proyecto | Metodología recomendada | Razón principal |
+|---|---|---|
+| Proyecto nuevo, equipo estable, PO disponible, sprints de 2 semanas | **Scrum** | Framework completo con ceremonias y artefactos claros para construir producto iterativamente |
+| Mantenimiento, soporte o bugs continuos, demanda impredecible | **Kanban** | Flujo continuo con WIP limits es más efectivo que comprometer sprints con demanda variable |
+| Quiero sprints pero también más flexibilidad de flujo | **Scrumban** | Combina timebox de Scrum con WIP limits de Kanban |
+| Proyecto técnico con alta incertidumbre inicial, equipo maduro | **Scrum + Sprint 0 + XP** | Scrum como marco + prácticas XP (TDD, pair programming) + Sprint 0 de validación técnica |
+| 3 o más equipos que deben coordinarse en el mismo producto | **SAFe o LeSS** | Sin coordinación formal, los equipos se bloquean entre sí. SAFe para organizaciones grandes, LeSS para 2-8 equipos |
+| Equipo sin experiencia en ágil, quiere empezar simple | **Kanban** | Menos ceremonias y roles que aprender desde el día 1. Se puede evolucionar a Scrum después. |
+
+> **Principio:** Empezar simple y agregar complejidad solo cuando el equipo la necesite. Un equipo nuevo haciendo Kanban bien supera a un equipo haciendo Scrum a medias.
+
+---
+
+### 17.3 — Checklist de arranque — Sprint 0
+
+El **Sprint 0** no es un sprint de desarrollo — es un sprint de preparación. Su objetivo es dejar al equipo listo para ejecutar el Sprint 1 sin bloquearse en las primeras horas. No produce incremento de producto, produce las condiciones para producirlo.
+
+**Checklist de artefactos mínimos:**
+
+| Artefacto | ¿Listo? | Criterio de completitud |
+|---|---|---|
+| **Visión del producto** | ☐ | Una frase que responde: ¿para quién? ¿qué problema resuelve? ¿qué lo diferencia? |
+| **Épicas identificadas** | ☐ | Al menos las épicas del MVP listadas y nombradas |
+| **Product Backlog inicial** | ☐ | Al menos 2 sprints de trabajo en US escritas y priorizadas (MoSCoW) |
+| **Definition of Ready (DoR)** | ☐ | Criterios acordados que una US debe cumplir para entrar al sprint |
+| **Definition of Done (DoD)** | ☐ | Criterios acordados que una US debe cumplir para considerarse terminada |
+| **Velocity base estimada** | ☐ | Story Points que el equipo estima poder completar en el primer sprint (si no hay histórico: usar planning poker con el equipo para las primeras US) |
+| **Herramienta de tracking configurada** | ☐ | Board en Jira (u otra herramienta) con columnas y WIP limits definidos |
+| **Ceremonias acordadas** | ☐ | Horario fijo para Daily, Planning, Review y Retro |
+| **Repositorio y entorno base** | ☐ | Repo creado, ramas configuradas, CI/CD básico operativo |
+| **Spike técnico completado (si aplica)** | ☐ | Si hay incertidumbre arquitectónica alta, el Spike resuelve antes del Sprint 1 |
+
+**El Sprint 0 está completo cuando todos los ítems marcados. Si alguno falta, el Sprint 1 empezará con deuda de proceso que se pagará en los primeros días.**
+
+---
+
+### 17.4 — Orden recomendado para construir los artefactos
+
+La cadena siguiente representa el orden lógico de construcción. Cada artefacto depende del anterior. Saltear un paso genera retrabajo.
+
+```
+┌────────────────────────────────────────────────────────────────────────────┐
+│              CADENA DE ARTEFACTOS — ARRANQUE DE PROYECTO ÁGIL              │
+│                                                                            │
+│  1. VISIÓN DEL PRODUCTO                                                    │
+│     "Para [usuario], que [necesidad], [nombre del producto] es             │
+│      [categoría] que [beneficio], a diferencia de [alternativa]."          │
+│     Fuente: docs/00_contexto/vision-producto_v1.0.md                       │
+│     ↓                                                                      │
+│  2. ÉPICAS                                                                 │
+│     Capacidades grandes del producto (multi-sprint).                       │
+│     Cada épica agrupa un conjunto de US relacionadas.                      │
+│     ↓                                                                      │
+│  3. STORY MAP                                                              │
+│     Visualizar el flujo completo del usuario recorriendo las épicas.       │
+│     Identificar el MVP (capa mínima horizontal del mapa).                  │
+│     Técnica: User Story Mapping (Sección 16.5)                             │
+│     ↓                                                                      │
+│  4. USER STORIES PRIORIZADAS (MoSCoW)                                     │
+│     Descomponer épicas en US. Clasificar Must / Should / Could / Won't.    │
+│     Solo las Must Have van al primer bloque de sprints.                    │
+│     Fuente: docs/06_backlog-tecnico/product-backlog_v1.0.md                │
+│     ↓                                                                      │
+│  5. DoR Y DoD DEFINIDOS                                                    │
+│     Definition of Ready: qué debe tener una US para entrar al sprint.     │
+│     Definition of Done: qué debe cumplir para considerarse terminada.      │
+│     Fuente: docs/06_backlog-tecnico/definition-of-ready_v1.0.md            │
+│             docs/08_calidad_y_pruebas/definition-of-done_v1.0.md           │
+│     ↓                                                                      │
+│  6. REFINAMIENTO INICIAL (Grooming)                                        │
+│     Refinar las US del primer sprint: criterios de aceptación,             │
+│     estimación en Story Points, descomposición en tareas técnicas.         │
+│     Técnicas: Example Mapping (16.6), Planning Poker                       │
+│     ↓                                                                      │
+│  7. SPRINT 0 — VALIDACIÓN TÉCNICA                                          │
+│     Walking Skeleton: arquitectura mínima de extremo a extremo.            │
+│     Spikes: resolver incertidumbres técnicas críticas.                     │
+│     Configurar entorno, CI/CD, repositorio, herramienta de tracking.       │
+│     ↓                                                                      │
+│  8. SPRINT 1 — PRIMER INCREMENTO                                           │
+│     Sprint Planning → Ejecución → Review → Retro                          │
+│     El equipo tiene todo lo necesario para ejecutar sin bloquearse         │
+│     en preguntas de proceso o de arquitectura.                             │
+└────────────────────────────────────────────────────────────────────────────┘
+```
+
+**Tiempo estimado para completar pasos 1-7 (Sprint 0):**
+
+| Tamaño del proyecto | Duración del Sprint 0 |
+|---|---|
+| Proyecto pequeño (1-3 personas, scope acotado) | 2-3 días |
+| Proyecto mediano (4-8 personas, scope moderado) | 1 semana |
+| Proyecto grande (9+ personas, múltiples épicas) | 1-2 semanas (puede ser un sprint completo) |
+
+---
+
+### 17.5 — Errores frecuentes al iniciar un proyecto ágil
+
+Estos son los errores más habituales en los primeros sprints. Cada uno tiene síntoma observable, causa raíz y corrección.
+
+| Error | Síntoma observable | Causa raíz | Corrección |
+|---|---|---|---|
+| **Sin Definition of Done desde el día 1** | Las US se "terminan" pero nadie sabe si están realmente terminadas. La deuda técnica crece silenciosamente. | El equipo asumió que "terminado" era obvio. | Definir el DoD en el Sprint 0. Incluir: código revisado, tests verdes, docu actualizada, CI verde. |
+| **Backlog vacío o insuficiente en el primer Sprint Planning** | El Sprint Planning dura 4 horas y no se llega a acuerdo sobre qué commitear. | No hubo refinamiento previo. Las US no cumplen el DoR. | Siempre entrar al Sprint Planning con las US del sprint refinadas y estimadas (DoR cumplido). |
+| **PO proxy sin poder de decisión real** | Las preguntas de negocio quedan sin respuesta durante el sprint. El equipo toma decisiones a ciegas o se bloquea esperando aprobación. | Se asignó un "representante" del negocio que no puede decidir. | Escalar el problema: el ágil no funciona sin un PO con autoridad real. Si no es posible, documentar el riesgo explícitamente. |
+| **Estimación sin referencia ni calibración** | El Sprint 1 se compromete con 60 SP y se completan 20. El equipo queda desmoralizado. | No existía velocity histórica ni se calibró con el equipo antes del primer sprint. | En el Sprint 0, usar Planning Poker sobre 3-5 US reales para establecer una escala de referencia. Comprometer conservadoramente el Sprint 1. |
+| **Saltarse el Sprint 0** | El equipo arranca el Sprint 1 sin entorno configurado, sin DoD, sin backlog refinado y sin criterios de estimación. Los primeros 3 días se pierden en setup. | Urgencia por "empezar a desarrollar ya". | El Sprint 0 no es pérdida de tiempo — es inversión. Un Sprint 0 bien hecho ahorra 2-3 sprints de retrabajo. |
+| **Demasiados ítems en el primer sprint (overcommitment)** | El sprint termina con 40% de las historias incompletas. El equipo siente que falló. | Optimismo en la estimación, sin data histórica. | Reducir el compromiso inicial en un 20-30% respecto a lo que el equipo cree que puede hacer. La velocity real se ajusta en sprints siguientes. |
+| **No realizar la Retrospectiva en el Sprint 1** | Los problemas del primer sprint se repiten en el segundo y el tercero. | "No tenemos tiempo" o "fue el primer sprint, no hay mucho que decir". | La Retro del Sprint 1 es la más importante. Es cuando el equipo establece sus normas de trabajo. Nunca saltearla. |
+| **Métricas desde el día 1 sin contexto** | El PO exige velocity alta en el primer sprint y presiona al equipo cuando no se cumple. | Confundir métricas de mejora (para el equipo) con métricas de control (para la gerencia). | Explicar que la velocity de los primeros 3 sprints es de calibración, no de producción. No usarla para evaluar al equipo. |
+
+---
+
 ## Control de Cambios
 
 | Versión | Fecha | Descripción |
@@ -2666,6 +2829,7 @@ La siguiente tabla cruza situaciones típicas de proyecto con las técnicas más
 | 1.2 | 2026-04-13 | Ampliada Sección 6 — Definiciones, técnicas de redacción y ejemplos en contextos web |
 | 1.3 | 2026-04-13 | Agregado índice completo de secciones y subsecciones en la cabecera |
 | 1.4 | 2026-04-13 | Agregados ejemplos en contextos web y otros dominios a la Sección 16 |
+| 1.5 | 2026-04-14 | Agregada Sección 17 — Guía práctica para arrancar un proyecto ágil |
 
 ---
 
