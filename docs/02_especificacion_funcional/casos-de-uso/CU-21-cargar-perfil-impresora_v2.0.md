@@ -1,4 +1,4 @@
-# Caso de Uso: Cargar Perfil de Impresora
+# Caso de Uso: Cargar Perfil de Dispositivo
 
 **Código:** CU-21
 **Archivo:** CU-21-cargar-perfil-impresora_v2.0.md
@@ -6,16 +6,19 @@
 **Estado:** Aprobado
 **Fecha:** 2026-05-27
 **Autor:** Equipo Funcional / Arquitectura
+**Glosario:** [docs/03_ux-ui/glosario_v1.0.md](../../03_ux-ui/glosario_v1.0.md)
+
+> **Nota terminológica (2026-04-25):** este CU usaba originalmente "perfil de impresora". Se actualizó la prosa al término canónico **"perfil de dispositivo"** según el glosario. La interfaz `IDeviceProfileProvider` y la clase `DeviceProfile` ya estaban correctamente nombradas. El nombre del archivo se conserva por estabilidad de links.
 
 ---
 
 # 1. Propósito
 
-Este caso de uso describe el mecanismo mediante el cual la librería del motor DSL obtiene perfiles de impresora a través de un proveedor configurable (`IDeviceProfileProvider`).
+Este caso de uso describe el mecanismo mediante el cual la librería del motor DSL obtiene perfiles de dispositivo a través de un proveedor configurable (`IDeviceProfileProvider`).
 
 El objetivo es desacoplar completamente la fuente del perfil del motor, permitiendo que el sistema cliente decida cómo y desde dónde se obtienen los perfiles (archivo local, API REST, base de datos, hardcodeados en memoria, etc.).
 
-> **Nota v2.0:** Este CU absorbe el antiguo CU-26 (Descargar Perfil de Impresora desde API), ya que la descarga remota es ahora una implementación posible del proveedor, no un caso de uso separado.
+> **Nota v2.0:** Este CU absorbe el antiguo CU-26 (Descargar Perfil desde API), ya que la descarga remota es ahora una implementación posible del proveedor, no un caso de uso separado.
 
 ---
 
@@ -225,7 +228,8 @@ public class InMemoryDeviceProfileProvider : IDeviceProfileProvider
 * **Modelo de proveedor:** Se reemplaza el modelo de "carga desde fuente" por el patrón de proveedor inyectable (`IDeviceProfileProvider`).
 * **Implementación default:** Se introduce `InMemoryDeviceProfileProvider` como implementación por defecto.
 * **Fluent API:** Se agrega `AddProfiles()` como extensión de `AddMotorDslEngine()`.
-* **Absorción CU-26:** Este CU ahora cubre el escenario de CU-26 (Descargar Perfil de Impresora desde API) como una posible implementación del proveedor.
+* **Absorción CU-26:** Este CU ahora cubre el escenario de CU-26 (Descargar Perfil desde API) como una posible implementación del proveedor.
+* **Edición terminológica (2026-04-25):** "perfil de impresora" → "perfil de dispositivo" en prosa, alineado con [docs/03_ux-ui/glosario_v1.0.md](../../03_ux-ui/glosario_v1.0.md).
 * **Responsabilidad del cliente:** La fuente de datos es responsabilidad exclusiva del sistema consumidor.
 
 ---

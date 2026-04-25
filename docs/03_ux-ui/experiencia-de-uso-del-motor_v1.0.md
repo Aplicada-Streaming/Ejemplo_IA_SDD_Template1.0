@@ -3,9 +3,19 @@
 **Proyecto:** Motor DSL de Documentos para Impresión
 **Documento:** experiencia-de-uso-del-motor_v1.0.md
 **Versión:** 1.0
-**Estado:** Aprobado
+**Estado:** REEMPLAZADO por v1.1 (2026-04-25)
 **Fecha:** 2026-03-28
 **Autor:** Equipo de Arquitectura / Funcional
+
+---
+
+> **AVISO — DOCUMENTO REEMPLAZADO**
+>
+> Este documento fue reemplazado por [experiencia-de-uso-del-motor_v1.1.md](experiencia-de-uso-del-motor_v1.1.md) el 2026-04-25.
+>
+> **Cambios principales en v1.1:** Personas y Developer Journeys; modelo canónico de 17 diagnósticos (`Diagnostic` con `Code`/`Severity`/`Halts`/`Hint`/`Context`); reglas explícitas de orden de operaciones; principios DX operacionalizables; vínculo al [glosario](glosario_v1.0.md).
+>
+> El contenido de abajo se conserva como referencia histórica. **No utilizar para diseño o desarrollo nuevo.**
 
 ---
 

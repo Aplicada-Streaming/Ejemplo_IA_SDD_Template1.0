@@ -3,9 +3,19 @@
 **Proyecto:** Motor DSL de Documentos para Impresión
 **Documento:** representacion-vista-previa-ui_v1.0.md
 **Versión:** 1.0
-**Estado:** Aprobado
+**Estado:** REEMPLAZADO por v1.1 (2026-04-25)
 **Fecha:** 2026-03-28
 **Autor:** Equipo de Arquitectura / Renderización
+
+---
+
+> **AVISO — DOCUMENTO REEMPLAZADO**
+>
+> Este documento fue reemplazado por [representacion-vista-previa-ui_v1.1.md](representacion-vista-previa-ui_v1.1.md) el 2026-04-25.
+>
+> **Cambios principales en v1.1:** tolerancia formal preview ↔ ESC/POS (±0 caracteres por línea, ±1 línea para QR/imagen); fuente monoespaciada obligatoria; sección de accesibilidad WCAG 2.2 AA; atajos de teclado; test de fidelidad por snapshot; vínculo al [glosario](glosario_v1.0.md).
+>
+> El contenido de abajo se conserva como referencia histórica. **No utilizar para diseño o desarrollo nuevo.**
 
 ---
 

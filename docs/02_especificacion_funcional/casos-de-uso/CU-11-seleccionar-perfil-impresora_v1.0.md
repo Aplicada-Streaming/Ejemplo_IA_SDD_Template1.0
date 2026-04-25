@@ -1,4 +1,4 @@
-# Caso de Uso: Seleccionar Perfil de Impresora
+# Caso de Uso: Seleccionar Perfil de Dispositivo
 
 **Código:** CU-11
 **Archivo:** CU-11-seleccionar-perfil-impresora_v1.0.md
@@ -6,14 +6,17 @@
 **Estado:** Propuesto
 **Fecha:** 2026-03-28
 **Autor:** Equipo Funcional / Arquitectura
+**Glosario:** [docs/03_ux-ui/glosario_v1.0.md](../../03_ux-ui/glosario_v1.0.md)
+
+> **Nota terminológica (2026-04-25):** este CU usaba originalmente "perfil de dispositivo". Se actualizó la prosa al término canónico **"perfil de dispositivo"** según el glosario (los nombres de archivo se conservan por estabilidad de links).
 
 ---
 
 # 1. Propósito
 
-Este caso de uso describe el proceso mediante el cual el sistema selecciona el perfil de impresora adecuado para adaptar el documento a las capacidades del dispositivo de salida.
+Este caso de uso describe el proceso mediante el cual el sistema selecciona el perfil de dispositivo adecuado para adaptar el documento a las capacidades del dispositivo de salida.
 
-El objetivo es garantizar que el procesamiento del documento (layout y renderizado) se realice considerando las restricciones físicas y funcionales de la impresora.
+El objetivo es garantizar que el procesamiento del documento (layout y renderizado) se realice considerando las restricciones físicas y funcionales del dispositivo (térmica, UI, PDF u otro).
 
 ---
 
@@ -43,7 +46,7 @@ El objetivo es garantizar que el procesamiento del documento (layout y renderiza
 
 ## En caso de éxito
 
-* Se selecciona un perfil de impresora válido.
+* Se selecciona un perfil de dispositivo válido.
 * El perfil queda disponible para el procesamiento del documento.
 * Se asocian las capacidades del dispositivo al flujo de renderizado.
 
@@ -57,7 +60,7 @@ El objetivo es garantizar que el procesamiento del documento (layout y renderiza
 
 # 5. Flujo Principal
 
-1. El sistema requiere un perfil de impresora.
+1. El sistema requiere un perfil de dispositivo.
 2. El sistema obtiene la lista de perfiles disponibles.
 3. El sistema determina el perfil a utilizar:
 
@@ -178,6 +181,8 @@ El objetivo es garantizar que el procesamiento del documento (layout y renderiza
 # 10. Cambios respecto a versión 1.0
 
 * Versión inicial del caso de uso.
+
+**Edición terminológica (2026-04-25):** sustitución de "perfil de impresora" por "perfil de dispositivo" en toda la prosa para alinear con el glosario canónico ([docs/03_ux-ui/glosario_v1.0.md](../../03_ux-ui/glosario_v1.0.md)). El nombre del archivo se mantiene por estabilidad de links.
 
 ---
 

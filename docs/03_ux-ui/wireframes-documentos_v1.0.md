@@ -1,5 +1,19 @@
 # wireframes-documentos_v1.0.md
 
+**Estado:** REEMPLAZADO por v1.1 (2026-04-25)
+
+---
+
+> **AVISO — DOCUMENTO REEMPLAZADO**
+>
+> Este documento fue reemplazado por [wireframes-documentos_v1.1.md](wireframes-documentos_v1.1.md) el 2026-04-25.
+>
+> **Cambios principales en v1.1:** cabecera estandarizada (Proyecto / Versión / Estado / Fecha / Autor); cajas ASCII corregidas; mapeo explícito de cada wireframe a nodos DSL reales (`text`, `loop`, `conditional`, `table`); aclaración de pseudosintaxis (`[FOR]`, `[IF]`) versus DSL canónica JSON; arquetipos adicionales (recibo simplificado, comanda de cocina); sección de Casos de Uso Asociados; vínculo al [glosario](glosario_v1.0.md).
+>
+> El contenido de abajo se conserva como referencia histórica. **No utilizar para diseño o desarrollo nuevo.**
+
+---
+
 ## 1. Introducción
 
 Este documento describe los wireframes conceptuales de los documentos soportados por el motor de renderizado DSL. Su objetivo es representar visualmente (a nivel lógico) cómo se estructuran los elementos dentro de un documento antes de su renderización final en distintos formatos (ESC/POS, UI, texto plano, PDF futuro).

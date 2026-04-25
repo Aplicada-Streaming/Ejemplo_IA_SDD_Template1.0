@@ -3,9 +3,19 @@
 **Proyecto:** Motor DSL de Documentos para Impresión
 **Documento:** representacion-documento-escpos_v1.0.md
 **Versión:** 1.0
-**Estado:** Aprobado
+**Estado:** REEMPLAZADO por v1.1 (2026-04-25)
 **Fecha:** 2026-03-28
 **Autor:** Equipo de Arquitectura / Renderización
+
+---
+
+> **AVISO — DOCUMENTO REEMPLAZADO**
+>
+> Este documento fue reemplazado por [representacion-documento-escpos_v1.1.md](representacion-documento-escpos_v1.1.md) el 2026-04-25.
+>
+> **Cambios principales en v1.1:** mapeo a comandos ESC/POS canónicos (hex + mnemónico); matriz de encoding con CP858 default y transliteración con warning; algoritmo de columnado de tablas con largest-remainder + reducción proporcional + word-wrap; vínculo al [glosario](glosario_v1.0.md).
+>
+> El contenido de abajo se conserva como referencia histórica. **No utilizar para diseño o desarrollo nuevo.**
 
 ---
 

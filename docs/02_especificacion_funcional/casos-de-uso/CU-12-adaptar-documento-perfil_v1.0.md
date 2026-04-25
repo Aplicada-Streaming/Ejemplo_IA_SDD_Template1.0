@@ -3,9 +3,19 @@
 **Código:** CU-12
 **Archivo:** CU-12-adaptar-documento-perfil_v1.0.md
 **Versión:** 1.0
-**Estado:** Propuesto
+**Estado:** REEMPLAZADO por v1.1 (2026-04-25)
 **Fecha:** 2026-03-28
 **Autor:** Equipo Funcional / Arquitectura
+
+---
+
+> **AVISO — DOCUMENTO REEMPLAZADO**
+>
+> Este documento fue reemplazado por [CU-12-adaptar-documento-perfil_v1.1.md](CU-12-adaptar-documento-perfil_v1.1.md) el 2026-04-25.
+>
+> **Cambios principales en v1.1:** algoritmo de columnado canónico (largest-remainder + reducción proporcional + word-wrap, `MIN_COL = 3`); pipeline de encoding con transliteración y fallback chain; fallbacks explícitos para QR/imagen/corte; flujos alternativos enlazados a códigos canónicos del catálogo de diagnósticos; criterios de aceptación verificables con ejemplos numéricos.
+>
+> El contenido de abajo se conserva como referencia histórica. **No utilizar para diseño o desarrollo nuevo.**
 
 ---
 
