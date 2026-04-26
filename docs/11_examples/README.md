@@ -10,7 +10,7 @@
 |----|-----------------------------|-----------|--------------------------------------------------------------------------|
 | 01 | MotorDsl.SampleApp          | Básico    | Ticket simple — aprender la librería paso a paso                         |
 | 02 | MotorDsl.MultaApp           | Avanzado  | Multa de tránsito — todas las funcionalidades, via ProjectReference      |
-| 03 | MotorDsl.MultaApp.Nuget     | Avanzado  | Idem MultaApp — consume los paquetes NuGet publicados en nuget.org      |
+| 03 | MotorDsl.MultaApp.Nuget     | Avanzado  | Idem MultaApp — consume los paquetes NuGet publicados en GitHub Packages |
 
 ---
 
@@ -109,7 +109,7 @@ dotnet build -f net10.0-android
 
 ### Propósito dual
 
-1. **Test de integración end-to-end:** valida que los 4 paquetes publicados en NuGet.org funcionen correctamente en una app MAUI real.
+1. **Test de integración end-to-end:** valida que los 4 paquetes publicados en GitHub Packages funcionen correctamente en una app MAUI real.
 2. **Ejemplo para el usuario final:** demuestra la forma canónica de integrar MotorDsl en un proyecto nuevo, sin necesidad de clonar el repositorio.
 
 ### Diferencia clave con MultaApp
@@ -132,7 +132,7 @@ dotnet build -f net10.0-android
 
 ### Qué demuestra
 
-- Instalación de MotorDsl desde NuGet.org (`Install-Package MotorDsl.Extensions`)
+- Instalación de MotorDsl desde GitHub Packages (`Install-Package MotorDsl.Extensions`, previo registro del feed `https://nuget.pkg.github.com/<owner>/index.json` autenticado con `GITHUB_TOKEN` con permiso `packages: read`)
 - Configuración DI con `AddMotorDslEngine()` desde un NuGet
 - Renderers custom (`BitmapEscPosRenderer`, `PdfRenderer`) implementados por la app (no incluidos en el NuGet)
 - `IBitmapRasterizer` implementado con SkiaSharp localmente

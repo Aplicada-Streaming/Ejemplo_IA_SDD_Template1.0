@@ -1,6 +1,6 @@
 # Ejemplo 03 — MotorDsl.MultaApp.Nuget
 
-> Réplica de MotorDsl.MultaApp que integra el motor a través de los paquetes NuGet publicados en nuget.org, en lugar de referencias de proyecto locales. Sirve de test de integración end-to-end y como ejemplo canónico para el usuario final.
+> Réplica de MotorDsl.MultaApp que integra el motor a través de los paquetes NuGet publicados en GitHub Packages, en lugar de referencias de proyecto locales. Sirve de test de integración end-to-end y como ejemplo canónico para el usuario final.
 
 **Estado:** Implementado — Sprint 08 (actualización post-publicación NuGet v1.0.2)  
 **Ubicación:** `samples/MotorDsl.MultaApp.Nuget/`
@@ -11,9 +11,9 @@
 
 Esta aplicación tiene dos objetivos complementarios:
 
-1. **Test de integración NuGet:** valida que los 4 paquetes publicados en nuget.org (`MotorDsl.Core`, `MotorDsl.Parser`, `MotorDsl.Rendering`, `MotorDsl.Extensions`) funcionen correctamente en una app MAUI real, con los mismos renderers y templates de `MotorDsl.MultaApp`.
+1. **Test de integración NuGet:** valida que los 4 paquetes publicados en GitHub Packages (`MotorDsl.Core`, `MotorDsl.Parser`, `MotorDsl.Rendering`, `MotorDsl.Extensions`) funcionen correctamente en una app MAUI real, con los mismos renderers y templates de `MotorDsl.MultaApp`.
 
-2. **Ejemplo para el usuario final:** demuestra la forma canónica de integrar MotorDsl en un proyecto nuevo, como si fuera un desarrollador externo que instala la librería desde NuGet.
+2. **Ejemplo para el usuario final:** demuestra la forma canónica de integrar MotorDsl en un proyecto nuevo, como si fuera un desarrollador externo que instala la librería desde el feed de GitHub Packages.
 
 **Nivel:** Avanzado  
 **Audiencia:** Desarrolladores que desean integrar MotorDsl en sus propios proyectos MAUI.
@@ -24,7 +24,7 @@ Esta aplicación tiene dos objetivos complementarios:
 
 | Aspecto              | MotorDsl.MultaApp            | MotorDsl.MultaApp.Nuget              |
 |----------------------|------------------------------|--------------------------------------|
-| Referencias al motor | `<ProjectReference>` locales | `<PackageReference>` desde nuget.org |
+| Referencias al motor | `<ProjectReference>` locales | `<PackageReference>` desde GitHub Packages |
 | Versión consumida    | código fuente local          | `MotorDsl.*.1.0.2`                   |
 | ApplicationId        | `com.motordsl.multaapp`      | `com.motordsl.multaapp.nuget`         |
 | Namespace            | `MotorDsl.MultaApp.*`        | `MotorDsl.MultaApp.Nuget.*`           |
@@ -123,6 +123,14 @@ builder.Services.AddSingleton<IBitmapRasterizer, SkiaSharpRasterizer>(); // Skia
 ```bash
 cd samples/MotorDsl.MultaApp.Nuget
 
+# Registrar el feed de GitHub Packages (una vez por máquina/usuario).
+# GITHUB_TOKEN debe ser un PAT con permiso `packages: read` para consumir paquetes.
+dotnet nuget add source https://nuget.pkg.github.com/<owner>/index.json \
+    --name github \
+    --username <USER> \
+    --password $GITHUB_TOKEN \
+    --store-password-in-clear-text
+
 # Android
 dotnet build -f net10.0-android
 dotnet run -f net10.0-android  # requiere dispositivo/emulador
@@ -130,6 +138,8 @@ dotnet run -f net10.0-android  # requiere dispositivo/emulador
 # iOS (macOS con workload ios instalado)
 dotnet build -f net10.0-ios -p:RuntimeIdentifier=iossimulator-arm64
 ```
+
+> Para publicar paquetes (no requerido por este ejemplo), el token debe tener permiso `packages: write`.
 
 ---
 
@@ -147,6 +157,7 @@ No se requiere clonar el repositorio de MotorDsl — todo llega desde NuGet.
 
 ## 9. Control de cambios
 
-| Versión | Fecha      | Autor     | Descripción                                              |
-|---------|------------|-----------|----------------------------------------------------------|
-| v1.0    | 2026-04-02 | DevOps    | Creación del ejemplo como consumidor de NuGet v1.0.2     |
+| Versión | Fecha      | Autor     | Descripción                                                                                                          |
+|---------|------------|-----------|----------------------------------------------------------------------------------------------------------------------|
+| v1.0    | 2026-04-02 | DevOps    | Creación del ejemplo como consumidor de NuGet v1.0.2                                                                 |
+| v1.1    | 2026-04-25 | DevOps    | Reconciliación de feed: NuGet.org → GitHub Packages para alinear con `09_devops/entornos-deploy_v1.0.md` y D1 del proyecto. |

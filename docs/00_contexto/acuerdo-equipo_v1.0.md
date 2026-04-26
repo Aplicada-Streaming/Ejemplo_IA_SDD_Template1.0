@@ -2,9 +2,9 @@
 
 **Proyecto:** Motor DSL de Generación de Documentos
 **Documento:** acuerdo-equipo_v1.0.md
-**Versión:** 1.0
+**Versión:** 1.1
 **Estado:** Borrador
-**Fecha:** 2026-03-28
+**Fecha:** 2026-04-25
 **Autor:** Equipo Técnico
 
 ---
@@ -49,14 +49,18 @@ Establecer los acuerdos de trabajo, roles y compromisos del equipo. Este documen
 
 ## 4.1 Branching Strategy
 
-- **Modelo:** GitFlow
-- **Branches principales:** `main` (producción), `develop` (integración)
-- **Branches de trabajo:** `feature/*`, `bugfix/*`, `hotfix/*`
-- **Convención de nombres:** `feature/US-XX-descripcion-corta`
+- **Modelo:** GitHub Flow estricto (decisión D3).
+- **Rama principal:** `main` — siempre liberable, protegida (no se permite push directo).
+- **Ramas de trabajo:** `feature/<scope>-<descripcion-corta>` creadas desde `main`.
+- **Integración:** PR obligatorio hacia `main` con **squash merge** y al menos 1 aprobación.
+- **Sin ramas persistentes adicionales:** no se utilizan `develop`, `release/*` ni `hotfix/*` como ramas de larga duración.
+- **Hotfixes urgentes:** se crea una rama efímera `feature/hotfix-<scope>` desde `main` con PR fast-track (review acelerada); no es una rama persistente.
+- **Convención de nombres:** `feature/US-XX-descripcion-corta` (o `feature/hotfix-<scope>` para correcciones urgentes).
+- **Detalles operativos:** ver [`09_devops/estrategia-versionado_v1.0.md` §7](../09_devops/estrategia-versionado_v1.0.md) como autoridad para reglas detalladas de branching y merge.
 
 ## 4.2 Code Review
 
-- Mínimo **1 aprobación** antes de merge a `develop`.
+- Mínimo **1 aprobación** antes de merge a `main`.
 - Las revisiones se realizan en un máximo de 24 horas hábiles.
 - El autor del PR es responsable de resolver los comentarios.
 
@@ -75,6 +79,11 @@ Establecer los acuerdos de trabajo, roles y compromisos del equipo. Este documen
 
 - Todo cambio relevante se refleja en `docs/`.
 - La documentación se actualiza como parte del Definition of Done.
+
+## 4.6 Convenciones de Commits
+
+- Se adopta **Conventional Commits** (decisión D5) para mensajes de commits y títulos de PR.
+- Detalles y formato: ver [`09_devops/estrategia-versionado_v1.0.md` §8](../09_devops/estrategia-versionado_v1.0.md).
 
 ---
 
@@ -104,9 +113,10 @@ Ver [definition-of-ready_v1.0.md](../06_backlog-tecnico/definition-of-ready_v1.0
 
 # 8. Control de Cambios
 
-| Versión | Fecha      | Descripción     |
-| ------- | ---------- | --------------- |
-| 1.0     | 2026-03-28 | Versión inicial |
+| Versión | Fecha      | Autor                | Descripción                                                                                                                                                            |
+| ------- | ---------- | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1.0     | 2026-03-28 | Equipo Técnico       | Versión inicial                                                                                                                                                        |
+| 1.1     | 2026-04-25 | Tech Lead / Equipo   | Alineación de branching strategy con GitHub Flow. Eliminadas ramas `develop` y `hotfix/*` como ramas persistentes; alineado con `09_devops/estrategia-versionado_v1.0.md` §7. |
 
 ---
 

@@ -296,18 +296,20 @@ El proyecto incluye:
 
 El proyecto cuenta con estrategia de:
 
-* Pipeline CI/CD
-* Versionado SemVer
-* Entornos de despliegue
-* Promoción entre ambientes
+* Pipeline CI/CD con SBOM (CycloneDX), SCA (Dependabot), firma de paquete y matriz OS multi-runner
+* Versionado SemVer 2.0.0 + Conventional Commits + MinVer (auto-versioning)
+* Modelo de distribución: feeds Preview/Stable + consumers downstream
+* Publicación en GitHub Packages
 
 📄 Ver documentación: [DevOps](09_devops/)
 
 Incluye:
 
+* [README de sección](09_devops/README.md) — índice, glosario, RACI, decisiones D1–D5
 * [pipeline-ci-cd_v1.0.md](09_devops/pipeline-ci-cd_v1.0.md)
 * [estrategia-versionado_v1.0.md](09_devops/estrategia-versionado_v1.0.md)
 * [entornos-deploy_v1.0.md](09_devops/entornos-deploy_v1.0.md)
+* [guia-publicacion-nuget_v1.0.md](09_devops/guia-publicacion-nuget_v1.0.md)
 
 ---
 
@@ -324,7 +326,7 @@ Incluye:
 
 ## 📜 Licencia
 
-Uso interno / institucional.
+MIT — ver [`LICENSE`](../LICENSE) en la raíz del repositorio.
 
 ---
 

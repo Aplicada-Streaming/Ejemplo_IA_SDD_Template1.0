@@ -38,7 +38,7 @@ El comando `dotnet nuget add source` usa los parámetros `--username` y `--passw
 - Tener un Personal Access Token (PAT) de GitHub (ver sección anterior)
 - Registrar la fuente una sola vez:
   ```powershell
-  dotnet nuget add source https://nuget.pkg.github.com/<ORG>/index.json \
+  dotnet nuget add source https://nuget.pkg.github.com/<owner>/index.json \
     --name NotionsGroups-GitHub \
     --username <GITHUB_USER> \
     --password <PAT>
